@@ -1,5 +1,6 @@
 package kr.or.seongjin.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +26,15 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
 	        return viewResolver;
 	    }
 	  
+	  @Value("${spring.resources.static-locations}") 
+	  private String staticResourceLocation;
+	  
+
+	  
 	  @Override
 	   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	       registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");  //   webapp/resources 경로를 의미
+	       registry.addResourceHandler("/resources/**").addResourceLocations(staticResourceLocation);
+	       registry.addResourceHandler("/jsp_resources/**").addResourceLocations("/resources/");
 	   }
 	  
 }

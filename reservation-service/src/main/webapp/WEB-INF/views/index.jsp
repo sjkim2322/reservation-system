@@ -8,8 +8,8 @@
 </head>
 <body>
 <ul>
-	<li><a href="/task1">task1</a></li>
-	<li><a href="/task1_rest">task1_rest</a></li>
+	<li><a href="/task/task1">task1</a></li>
+	<li><a href="/task/task1_rest">task1_rest</a></li>
 </ul>
 </body>
 </html>

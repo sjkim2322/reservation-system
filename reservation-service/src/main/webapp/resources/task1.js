@@ -1,5 +1,5 @@
 $.ajax({
-		url:'./api/task1',
+		url:'/api/task1',
 		dataType:'json',
 		type:'get',
 	success:function(result) {
@@ -67,7 +67,7 @@ $('#insert').on('click',function() {
 	var data = {}
 	data.name = $('#insertName').val() ;
 	$.ajax({
-		url:'./api/task1',
+		url:'/api/task1',
 		dataType:'json',
 		headers: {
 				'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ $('#categoryTable').on('click','.update',function() {
 	var name=button.parent().siblings('.categoryName').children().val();
 	var data = {'id':id,'name':name}
 	$.ajax({
-		url:'./api/task1',
+		url:'/api/task1',
 		headers: {
 			'Content-Type': 'application/json'
 		},
@@ -99,7 +99,7 @@ $('#categoryTable').on('click','.update',function() {
 $('#categoryTable').on('click','.delete',function() {
 	var button=$(this);
 	$.ajax({
-		url:'./api/task1/'+$(this).val(),
+		url:'/api/task1/'+$(this).val(),
 		type:'DELETE',
  	 success:function() {
  		button.parents('tr').remove();

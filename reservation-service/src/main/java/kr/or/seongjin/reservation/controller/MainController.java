@@ -12,13 +12,9 @@ public class MainController {
     @GetMapping(path = "/")
     public String index(Model model){
     	
-        return "index";
+        return "forward:/resources/html/mainpage.html";
     }
     
-    @GetMapping(path = "/task1_rest")
-    public String task1_rest(Model model){
-    	
-        return "task1_rest";
-    }
+  
     
 }

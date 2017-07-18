@@ -9,14 +9,12 @@ import kr.or.seongjin.reservation.dao.CategoryDao;
 import kr.or.seongjin.reservation.domain.Category;
 import kr.or.seongjin.reservation.service.CategoryService;
 
-
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	CategoryDao dao;
-	
-	
+
 	@Override
 	public Category insert(Category category) {
 		int id;
@@ -36,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public boolean update(Category category) {
-		if(dao.update(category)!=0)
+		if (dao.update(category) != 0)
 			return true;
 		else
 			return false;
@@ -44,10 +42,11 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public boolean delete(int id) {
-		if(dao.delete(id)!=0)
+		if (dao.delete(id) != 0) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 
 }

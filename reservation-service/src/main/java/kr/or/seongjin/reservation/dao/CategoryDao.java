@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import kr.or.seongjin.reservation.dao.sql.CategorySqls;
 import kr.or.seongjin.reservation.domain.Category;
 
 import javax.sql.DataSource;
@@ -21,7 +22,7 @@ import java.util.Map;
 @Repository
 public class CategoryDao {
 	
-	 private NamedParameterJdbcTemplate jdbc; // sql 을 실행하기 위해 사용되는 객체
+	 	private NamedParameterJdbcTemplate jdbc; // sql 을 실행하기 위해 사용되는 객체
 	    private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
 	    private RowMapper<Category> rowMapper = BeanPropertyRowMapper.newInstance(Category.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
 

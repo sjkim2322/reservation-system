@@ -87,9 +87,7 @@ $('#categoryTable').on('click','.update',function() {
 	var data = {'id':id,'name':name}
 	$.ajax({
 		url:'/api/task1',
-		headers: {
-			'Content-Type': 'application/json'
-		},
+		contentType: 'application/json',
 		data : JSON.stringify(data),
 		type:'PUT',
  	 success:function() {
@@ -98,8 +96,11 @@ $('#categoryTable').on('click','.update',function() {
 });
 $('#categoryTable').on('click','.delete',function() {
 	var button=$(this);
+	var data={'id' : $(this).val()}
 	$.ajax({
-		url:'/api/task1/'+$(this).val(),
+		url:'/api/task1',
+		contentType: 'application/json',
+		data : JSON.stringify(data),
 		type:'DELETE',
  	 success:function() {
  		button.parents('tr').remove();

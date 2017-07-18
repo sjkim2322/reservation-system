@@ -11,7 +11,7 @@
 
 <h1> 카테고리 jsp.ver </h1>
 
-<form method="post" action="/task1/insert">
+<form id='myform' method="post" action="./task1/insert">
 	카테고리 명 : <input type="text" name="name">
 	<input type="submit" value="추가">
 </form>
@@ -23,7 +23,7 @@
 		       <th>id</th> <td>${category.id}</td>
 			   <th>name</th> <td>${category.name}</td>
 			   <th>
-				   <form method="post" action="/task1/update">
+				   <form method="post" action="./task1/update">
 				   <input type="hidden" name="id" value= '${category.id}' />
 				   	<input type="text" name="name" value= '${category.name}' />
 				   	<input type="submit" value="수정">
@@ -31,7 +31,7 @@
 			   </th>
 		   
 		  	   <th>
-		  	   	<form method="post" action="/task1/delete">
+		  	   	<form method="post" action="./task1/delete">
 		  	   		<input type="hidden" name="id" value= '${category.id}' />
 		  	 		<input type="submit" value="삭제">
 		  	 	</form>	

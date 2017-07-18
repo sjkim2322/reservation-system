@@ -13,7 +13,8 @@
 <table id="categoryTable">
 		
 </table>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="//code.jquery.com/jquery-latest.min.js"></script>
 <script src="/jsp_resources/task1.js"></script>
 </body>
 </html>
+

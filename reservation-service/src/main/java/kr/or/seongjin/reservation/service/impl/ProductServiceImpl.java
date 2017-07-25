@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.seongjin.reservation.dao.ProductDao;
 import kr.or.seongjin.reservation.domain.Product;
+import kr.or.seongjin.reservation.domain.ProductPrice;
 import kr.or.seongjin.reservation.service.ProductService;
 
 @Service
@@ -19,13 +20,14 @@ public class ProductServiceImpl implements ProductService {
 		this.productDao = productDao;
 	}
 
+
 	@Override
-	public List<Product> selectAllByCategory(int categoryId, int offset) {
+	public List<Product> selectAllByCategoryForMainPage(int categoryId, int offset) {
 
 		if (categoryId == 0)
-			return productDao.selectAll(offset);
+			return ListFilter(productDao.selectAll(offset));
 		else
-			return productDao.selectByCategory(categoryId, offset);
+			return ListFilter(productDao.selectByCategory(categoryId, offset));
 	}
 
 	@Override
@@ -36,4 +38,44 @@ public class ProductServiceImpl implements ProductService {
 			return productDao.countByCategory(categoryId);
 	}
 
+	@Override
+	public Product getDetailProduct(Integer productId) {
+		return productDao.selectByProductId(productId);
+	}
+	
+
+
+	@Override
+	public List<String> getImagesByProductId(Integer productId) {
+
+		return productDao.selectImagesByProductId(productId);
+	}
+
+	@Override
+	public List<ProductPrice> getPricesByProductId(Integer productId) {
+		return productDao.selectPricesByProductId(productId);
+	}
+			
+	private void addPlaceNameToList(Product product){
+			product.setPlace_name(productDao.selectPlaceNameByProductId(product.getId()));
+	}
+	
+	private void addRepresentImg(Product product) {
+			String imgId;
+			imgId=productDao.selectReprentImgByProductId(product.getId());
+			
+			if(imgId==null) {
+				product.setImgPath("0");
+			}
+			else {
+			product.setImgPath(imgId);
+			}
+	}
+	private List<Product> ListFilter(List<Product> productList) {
+		for(Product product : productList) {
+			addPlaceNameToList(product);
+			addRepresentImg(product);
+		}
+		return productList;
+	}
 }

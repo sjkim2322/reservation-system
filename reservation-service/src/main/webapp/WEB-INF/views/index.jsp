@@ -8,8 +8,9 @@
 </head>
 <body>
 <ul>
-	<li><a href="/task/task1">task1</a></li>
-	<li><a href="/task/task1_rest">task1_rest</a></li>
+	<li><a href="/admin/categories">Category</a></li>
+	<li><a href="/admin/categories_rest">Category_rest</a></li>
+	<li><a hre="/fileManage">File Manage</a>
 </ul>
 </body>
 </html>

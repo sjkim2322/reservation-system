@@ -14,49 +14,45 @@ import kr.or.seongjin.reservation.domain.Category;
 import kr.or.seongjin.reservation.service.CategoryService;
 
 @Controller
-@RequestMapping("/task")
-public class Task1Controller {
+@RequestMapping("/admin")
+public class CategoryController {
 
 	@Autowired
 	CategoryService categoryService;
 
-	@GetMapping
-	public String task(Model model) {
 
-		return "index";
+	@GetMapping(path = "/categories_rest")
+	public String categories_rest(Model model) {
+
+		return "categories_rest";
 	}
 
-	@GetMapping(path = "/task1_rest")
-	public String task1_rest(Model model) {
-
-		return "task1_rest";
-	}
-
-	@GetMapping(path = "/task1")
-	public String task1(Model model) {
+	@GetMapping(path = "/categories")
+	public String categories(Model model) {
 
 		model.addAttribute("categoryList", categoryService.selectAll());
-		return "task1";
+		return "categories";
 	}
 
-	@PostMapping(path = "/task1/insert")
-	public String task1Insert(HttpServletRequest req) {
+	@PostMapping(path = "/categories/insert")
+	public String categoriesInsert(HttpServletRequest req) {
 
 		Category category = new Category((String) req.getParameter("name"));
 		categoryService.insert(category);
-		return "redirect:/task/task1";
+		return "redirect:/task/categories";
 	}
 
-	@PostMapping(path = "/task1/update")
-	public String task1Update(@ModelAttribute Category category) {
+	@PostMapping(path = "/categories/update")
+	public String categoriesUpdate(@ModelAttribute Category category) {
 		categoryService.update(category);
-		return "redirect:/task/task1";
+		return "redirect:/task/categores";
 	}
 
-	@PostMapping(path = "/task1/delete")
-	public String task1Delete(@ModelAttribute Category category) {
+	@PostMapping(path = "/categories/delete")
+	public String categoriesDelete(@ModelAttribute Category category) {
 
 		categoryService.delete(category.getId());
-		return "redirect:/task/task1";
+		return "redirect:/task/categories";
+		
 	}
 }

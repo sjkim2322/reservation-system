@@ -11,13 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.seongjin.reservation.domain.Product;
 import kr.or.seongjin.reservation.service.ProductService;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/productList")
 public class ProductController {
 
 	private ProductService productService;
@@ -27,9 +28,15 @@ public class ProductController {
 		this.productService = productService;
 	}
 
-	@GetMapping("/{categoryId}")
+	@GetMapping("/{productId}")
+	public Product getDetailProduct(@PathVariable int productId) {
+		
+		return productService.getDetailProduct(productId);
+	}
+	
+	@GetMapping("/categories/{categoryId}")
 	public List<Product> task1(@PathVariable int categoryId,HttpServletRequest request,HttpServletResponse  response) {
 		response.addIntHeader("totalCount", productService.countByCategory(categoryId));
-		return productService.selectAllByCategory(categoryId,Integer.parseInt(request.getHeader("offset")));
+		return productService.selectAllByCategoryForMainPage(categoryId,Integer.parseInt(request.getHeader("offset")));
 	}
 }

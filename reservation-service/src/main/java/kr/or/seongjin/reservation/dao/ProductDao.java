@@ -15,18 +15,20 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.seongjin.reservation.dao.sql.ProductSqls;
 import kr.or.seongjin.reservation.domain.Product;
+import kr.or.seongjin.reservation.domain.ProductPrice;
 
 
 
 @Repository
 public class ProductDao {
 
- 	private NamedParameterJdbcTemplate jdbc; // sql 을 실행하기 위해 사용되는 객체
+ 	private NamedParameterJdbcTemplateHandlingNull jdbc; // sql 을 실행하기 위해 사용되는 객체
     private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
     private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
-
+    
+    
     public ProductDao(DataSource dataSource) {
-        this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+        this.jdbc = new NamedParameterJdbcTemplateHandlingNull(dataSource);
         this.insertAction = new SimpleJdbcInsert(dataSource)
                 .withTableName("product")
                 .usingGeneratedKeyColumns("id");
@@ -45,12 +47,40 @@ public class ProductDao {
     	return jdbc.query(ProductSqls.SELECT_BY_CATEGORY, params, rowMapper);
     }
     
-    public int countAll() {
+    public Integer countAll() {
     	Map<String, ?> params = null;
     	return jdbc.queryForObject(ProductSqls.COUNT_ALL,params,Integer.class);
     }
-    public int countByCategory(int categoryId) {
+    
+    public Integer countByCategory(int categoryId) {
     	Map<String, ?> params = Collections.singletonMap("id", categoryId);
     	return jdbc.queryForObject(ProductSqls.COUNT_BY_CATEGORY,params,Integer.class);
     }
+    
+    
+    public String selectPlaceNameByProductId(int productId) {
+    	Map<String, ?> params = Collections.singletonMap("product_id", productId);
+    	return jdbc.queryForObject(ProductSqls.SELECT_PLACE_NAME_BY_PRODUCT_ID,params,String.class); 
+    }
+    
+    public Product selectByProductId(Integer productId) {
+    	Map<String, ?> params = Collections.singletonMap("id", productId);
+    	 return jdbc.queryForObject(ProductSqls.SELECT_BY_PRODUCT_ID, params, rowMapper);
+    }
+
+	public String selectReprentImgByProductId(Integer productId) {
+		Map<String, ?> params = Collections.singletonMap("id", productId);
+		return jdbc.queryForObject(ProductSqls.SELECT_REPRSENT_IMG_BY_PRODUCT_ID, params, String.class);
+	}
+
+	public List<String> selectImagesByProductId(Integer productId) {
+		Map<String, ?> params = Collections.singletonMap("productId", productId);
+		return jdbc.queryForList(ProductSqls.SELECT_IMAGES_BY_PRODUCT_ID, params, String.class);
+	}
+
+	public List<ProductPrice> selectPricesByProductId(Integer productId) {
+		Map<String, ?> params = Collections.singletonMap("productId", productId);
+		return jdbc.query(ProductSqls.SELECT_PRICES_BY_PRODUCT_ID, params, BeanPropertyRowMapper.newInstance(ProductPrice.class));
+	}
+
 }

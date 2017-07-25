@@ -12,15 +12,14 @@ var resv_category = (function(){
 	 getList = function() {
 		 var list_result;
 		 var ajax= $.ajax({
-				url:'/api/task1',
+				url:'/api/categories',
 				dataType:'json',
 				type:'get',
 			  success:drawCategory
 			});
 		};
 	 drawCategory = function (result) {
-		var data = { 'categories':result };
-		$("ul.event_tab_lst.tab_lst_min").append(categoryTemplate(data));
+		$("ul.event_tab_lst.tab_lst_min").append(categoryTemplate(result));
 	 };
 
   return {
@@ -55,8 +54,7 @@ var resv_time = (function(){
 		};
 	var	stopInterval = function() {
 		  clearInterval(interval);
-		  if(timeout===null)
-	    startTimeout();
+
 		};
 	var	startTimeout = function() {
 		    timeout= setTimeout(startInterval,4000);
@@ -81,13 +79,20 @@ var resv_time = (function(){
 			},
 			mouseEnter : function() {
 				stopInterval();
+				if(timeout===null)
+				startTimeout();
 			},
 			init : function() {
+				console.log("on");
 				startInterval();
+			},
+			inactive : function() {
+				console.log("off");
+				stopInterval();
+				stopTimeout();
 			}
 	}
 })();
-
 //상단 프로모션 모듈
 var resv_promotion = (function(){
 	var imgcnt=($('ul.visual_img').children().length-1);
@@ -161,7 +166,7 @@ var resv_product = (function(){
 
 	var requestProduct = function(categoryId) {
 			$.ajax({
-				url:'/api/product/'+categoryId,
+				url:'/api/productList/categories/'+categoryId,
 				dataType:'json',
 				type:'GET',
 				headers:{
@@ -197,7 +202,15 @@ return {
 })();
 
 //init
-resv_time.init();
+// resv_time.init();
+// $(window).focus(function() {
+//   resv_time.init();
+// });
+//
+// $(window).blur(function() {
+//     resv_time.inactive();
+// });
+
 
 resv_category.getCategoryList();
 
@@ -205,27 +218,27 @@ $('.event_tab_lst.tab_lst_min').on('click','.item',function() {
 	resv_category.change.apply(this);
 });
 
-$('.btn_nxt_e').on({
-  click : function () {
-    if(!resv_time.getClicked()) {
-      resv_time.setClicked(true);
-      resv_promotion.moveNext();
-      resv_time.buttonClicked();
-    }
-  },
-  mouseenter:resv_time.mouseEnter
-});
-
-$('.btn_pre_e').on({
-  click:function() {
-		if(!resv_time.getClicked()) {
-      resv_time.setClicked(true);
-    resv_promotion.movePrev();
-    resv_time.buttonClicked();
-    }
-  },
-  mouseenter: resv_time.mouseEnter
-});
+// $('.btn_nxt_e').on({
+//   click : function () {
+//     if(!resv_time.getClicked()) {
+//       resv_time.setClicked(true);
+//       resv_promotion.moveNext();
+//       resv_time.buttonClicked();
+//     }
+//   },
+//   mouseenter:resv_time.mouseEnter
+// });
+//
+// $('.btn_pre_e').on({
+//   click:function() {
+// 		if(!resv_time.getClicked()) {
+//       resv_time.setClicked(true);
+//     resv_promotion.movePrev();
+//     resv_time.buttonClicked();
+//     }
+//   },
+//   mouseenter: resv_time.mouseEnter
+// });
 
 $('.more').on('click','button.btn',function() {
 	var categoryId = $('li.item > a.active').closest('.item').data('category');

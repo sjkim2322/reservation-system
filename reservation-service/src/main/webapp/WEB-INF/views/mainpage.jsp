@@ -21,7 +21,7 @@
                     <a href="#" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                     <a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="#" class="btn_my"> <span title="내 예약">MY</span> </a>
+                <a href="/myreservation" class="btn_my"> <span title="내 예약">MY</span> </a>
             </header>
         </div>
         <hr>
@@ -111,23 +111,23 @@
         </div>
     </footer>
     <script id="category-template" type="text/x-handlebars-template">
-		 {{#categories}} 
+		 {{#each this}} 
 		 <li class="item" data-category={{id}}>
                         <a class="anchor"> <span>{{name}}</span> </a>
          </li>
-		{{/categories}} 
+		{{/each}} 
 	</script>
 	<script id="product-template" type="text/x-handlebars-template">
 	<li class='item'>
-	<a href='#' class='item_book'>
+	<a href='/productDetail/{{id}}' class='item_book'>
 			<div class='item_preview'>
-			 		<img alt='{{name}}'class='img_thumb' src='/resources/img/임시.png'>
+			 		<img alt='{{name}}'class='img_thumb' src='/files/{{imgPath}}'>
 			  	<span class='img_border'></span>
 			</div>
 			<div class='event_txt'>
 					<h4 class='event_txt_tit'>
-				  		<span>{{event}}</span>
-				  		<small class='sm'>장소</small>
+				  		<span>{{name}}</span>
+			  				<small class='sm'>{{place_name}}</small>
 			  		</h4>
 					<p class='event_txt_dsc'>{{description}}</p>
 			</div>

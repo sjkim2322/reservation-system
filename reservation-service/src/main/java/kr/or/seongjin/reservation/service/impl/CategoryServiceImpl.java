@@ -19,12 +19,23 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category insert(Category category) {
 		int id;
 		id = dao.insert(category);
-		return dao.selectById(id);
+		
+		if(id<=0) {
+			return null;
+		}
+		else
+			return dao.selectById(id);
 	}
 
 	@Override
 	public Category selectById(int id) {
-		return dao.selectById(id);
+		
+		if(id<=0) {
+			return null;
+		}
+		else { 
+			return dao.selectById(id);
+		}
 	}
 
 	@Override

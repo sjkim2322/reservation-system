@@ -1,6 +1,7 @@
-package kr.or.seongjin.reservation.service;
+package kr.or.seongjin.reservation.dao;
 
-
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,34 +11,28 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.seongjin.config.RootApplicationContextConfig;
-
+import kr.or.seongjin.reservation.domain.Category;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = RootApplicationContextConfig.class)
 @Transactional
-public class CategoryServiceTest {
+public class UserDaoTest {
 
-	private CategoryService setterInjection;
-	
-	private CategoryService constructorInjection;
-	
 	@Autowired
-	private  CategoryService fieldInjection;
-	
-	//@Autowired
-//	void setFieldInjection(CategoryService fieldInjection) {
-//		System.out.println("!@#");
-//		if(this.fieldInjection==fieldInjection)
-//		this.fieldInjection=fieldInjection;
-//	}
-	
-	
-	
-	
+	private UserDao dao;
+
+
+ 
 	@Test
-	public void fieldTest() {
-		System.out.println("field"+fieldInjection);
+	public void shouldSelect() {
+		// given
+		System.out.println((dao.selectUser(36364979)));
 	}
 	
+		
 	
+	
+	
+	
+
 }

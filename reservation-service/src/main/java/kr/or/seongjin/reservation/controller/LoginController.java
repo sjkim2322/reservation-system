@@ -27,9 +27,6 @@ import kr.or.seongjin.reservation.service.LoginService;
 @Controller
 public class LoginController {
 
-	
-	
-	
 	private LoginService loginService;
 	
 	@Autowired

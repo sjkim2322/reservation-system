@@ -49,10 +49,10 @@ public class NaverLoginService implements LoginService {
 
 	@Override
 	public String requestCertification(HttpSession session,String originPath) throws UnsupportedEncodingException {
-		System.out.println(originPath);
+		String encodedOriginPath = URLEncoder.encode(originPath,"UTF-8");
 		session.setAttribute("state", getState());
 		String apiUrl = CERTIFICATE_URI + "client_id=" + ClIENT_ID + "&response_type=code" + "&redirect_uri="
-				+ URLEncoder.encode(REDIRECT_URI+"?originPath="+originPath, "UTF-8") + "&state=" + session.getAttribute("state");
+				+ URLEncoder.encode(REDIRECT_URI+"?originPath="+encodedOriginPath, "UTF-8") + "&state=" + session.getAttribute("state");
 		return apiUrl;
 	}
 
@@ -79,7 +79,7 @@ public class NaverLoginService implements LoginService {
 	public User logIn(User user) {
 		
 		User alreadyUser = selectUser(user.getId());
-		if(alreadyUser.getId()==null) {
+		if(alreadyUser==null) {
 			Integer newUserId = userDao.insert(user);
 			return userDao.selectUser(newUserId);
 		}

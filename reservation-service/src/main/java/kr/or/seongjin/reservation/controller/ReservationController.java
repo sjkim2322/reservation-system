@@ -22,12 +22,12 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/{reservationId}")
-	public Product getReservation(@PathVariable int productId) {
+	public Product getReservation(@PathVariable Integer productId) {
 		return null;
 	}
 
 	@GetMapping("/user")
-	public Product getReservationByUserId(@PathVariable int productId) {
+	public Product getReservationByUserId(@PathVariable Integer productId) {
 		return null;
 	}
 }

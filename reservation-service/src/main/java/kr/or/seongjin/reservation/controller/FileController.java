@@ -96,6 +96,7 @@ public class FileController {
 
 
 		response.setHeader("Content-Disposition", "inline; filename=\"" + fileDto.getFile_name() + "\";");
+		//구브라우저 미구현.
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", fileDto.getContent_type());
 		response.setHeader("Content-Length", "" + fileDto.getFile_length());

@@ -29,13 +29,13 @@ public class ProductController {
 	}
 
 	@GetMapping("/{productId}")
-	public Product getDetailProduct(@PathVariable int productId) {
+	public Product getDetailProduct(@PathVariable Integer productId) {
 		
 		return productService.getDetailProduct(productId);
 	}
 	
 	@GetMapping("/categories/{categoryId}")
-	public List<Product> task1(@PathVariable int categoryId,HttpServletRequest request,HttpServletResponse  response) {
+	public List<Product> task1(@PathVariable Integer categoryId,HttpServletRequest request,HttpServletResponse  response) {
 		response.addIntHeader("totalCount", productService.countByCategory(categoryId));
 		return productService.selectAllByCategoryForMainPage(categoryId,Integer.parseInt(request.getHeader("offset")));
 	}

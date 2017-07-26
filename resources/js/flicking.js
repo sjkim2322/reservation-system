@@ -81,7 +81,6 @@ function FlickingModule() {
   }
 
   this.init = function(target) {
-
     flickingTarget = target;
     targetChildren = target.children();
     childrenLength = targetChildren.length;

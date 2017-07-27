@@ -8,6 +8,7 @@ import java.security.SecureRandom;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -26,11 +27,13 @@ public class NaverLoginService implements LoginService {
 
 	private static final String REDIRECT_URI = "http://localhost:8080/login/callback";
 	private static final String CERTIFICATE_URI = "https://nid.naver.com/oauth2.0/authorize?";
-	private static final String ClIENT_ID = "TR3o9GBFUdOU1HyyRoxY";
-	private static final String ClIENT_SECRET = "aOJJjemMyU";
 	private static final String TOKEN_URI = "https://nid.naver.com/oauth2.0/token?";
 	private static final String USER_INFO_URI = "https://openapi.naver.com/v1/nid/me";
-
+	
+	@Value("${spring.naver.client.id}")
+	private String ClIENT_ID;
+	@Value("${spring.naver.client.secret}")
+	private String ClIENT_SECRET;
 	
 	private UserDao userDao;
 
@@ -76,7 +79,7 @@ public class NaverLoginService implements LoginService {
 	public User logIn(User user) {
 		
 		User alreadyUser = selectUser(user.getId());
-		if(alreadyUser.getId()==null) {
+		if(alreadyUser==null) {
 			Integer newUserId = userDao.insert(user);
 			return userDao.selectUser(newUserId);
 		}

@@ -79,7 +79,7 @@ public class NaverLoginService implements LoginService {
 	public User logIn(User user) {
 		
 		User alreadyUser = selectUser(user.getId());
-		if(alreadyUser.getId()==null) {
+		if(alreadyUser==null) {
 			Integer newUserId = userDao.insert(user);
 			return userDao.selectUser(newUserId);
 		}

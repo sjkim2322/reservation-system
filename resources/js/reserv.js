@@ -97,3 +97,23 @@ function Validation() {
 }
   Validation.prototype = myObserver;
   Validation.prototype.constructor=Validation;
+
+$(".bk_btn_wrap").on("click", function(){
+    var data = new Object();
+    data.generalTicketCount = $("input.count_control_input:eq(0)").val();
+    data.youthTicketCount = $("input.count_control_input:eq(1)").val();
+    data.childTicketCount = $("input.count_control_input:eq(2)").val();
+    data.reservationName = $("input.text").val();
+    data.reservationTel = $("input.tel").val();
+    data.reservationEmail = $("input.email").val();
+
+    $.ajax({
+      type:'post',
+      url:'/api/products/${id}/reservation',
+      contentType: "application/json; charset=utf-8",
+      data:JSON.stringify(data),
+      success:function() {
+        console.log(data);
+      }
+    });
+  })

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.seongjin.reservation.dao.ReservationDAO;
+import kr.or.seongjin.reservation.dao.ReservationDao;
 import kr.or.seongjin.reservation.domain.Reservation;
 import kr.or.seongjin.reservation.domain.ReservationCount;
 import kr.or.seongjin.reservation.domain.ReservationDTO;
@@ -14,10 +14,10 @@ import kr.or.seongjin.reservation.service.ReservationService;
 @Service
 public class ReservationServiceImpl implements ReservationService{
 
-	private ReservationDAO reservationDao;
+	private ReservationDao reservationDao;
 	
 	@Autowired
-	public ReservationServiceImpl(ReservationDAO reservationDao) {
+	public ReservationServiceImpl(ReservationDao reservationDao) {
 		this.reservationDao = reservationDao; 
 	}
 	
@@ -45,6 +45,7 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		return list;
 	}
+	
 
 	
 }

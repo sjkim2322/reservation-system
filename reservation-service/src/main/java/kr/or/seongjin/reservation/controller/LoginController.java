@@ -36,9 +36,10 @@ public class LoginController {
 	
 	@GetMapping(path = "/login")
 	public String login(HttpSession session,
-			@RequestParam(value="originPath",required=false)String originPath) throws UnsupportedEncodingException{
+			@RequestParam(required=false)String originPath) throws UnsupportedEncodingException{
 		System.out.println(originPath);
 		String apiURL= loginService.requestCertification(session,originPath);
+		System.out.println("api"+apiURL);
       return "redirect:"+apiURL;
 	}
 
@@ -51,7 +52,8 @@ public class LoginController {
 		  if(session.getAttribute("state").equals(state)) {
 			  User user = loginService.requestUserInfo(code,state);
 			  session.setAttribute("user", loginService.logIn(user));
-				
+			  
+			  System.out.println(originPath);
 			  return "redirect:"+originPath;
 		  }
 		  else {

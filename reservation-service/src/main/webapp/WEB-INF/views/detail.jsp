@@ -358,8 +358,9 @@
 			</ul>
 		
 	</div>
+	</script>
 </body>
-</script>
+
 
 <script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
 <script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>

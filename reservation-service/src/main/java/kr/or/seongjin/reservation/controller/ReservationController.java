@@ -45,8 +45,9 @@ public class ReservationController {
 
 	@GetMapping
 	public List<ReservationDTO> getReservationByUserId(HttpSession session) {
+		User user = (User)session.getAttribute("user");
 		try {
-			return reservationService.getReservationByUser((int) session.getAttribute("id"));
+			return reservationService.getReservationByUser(userService.getUserIdBySnsId(user.getId()));
 		} catch (Exception e) {
 			// TODO exception
 			e.printStackTrace();
@@ -56,8 +57,9 @@ public class ReservationController {
 	
 	@GetMapping("/count")
 	public List<ReservationCount> getReservationCountByUserId(HttpSession session) {	
+		User user = (User)session.getAttribute("user");
 		try {
-			return reservationService.getReservationCountByUser((int) session.getAttribute("id"));
+			return reservationService.getReservationCountByUser(userService.getUserIdBySnsId(user.getId()));
 		} catch (Exception e) {
 			//TODO exception
 			e.printStackTrace();
@@ -68,7 +70,6 @@ public class ReservationController {
 	@PostMapping
 	public void serReservation(HttpSession session, @RequestBody Reservation reservation) throws Exception {
 		User user = (User)session.getAttribute("user");
-		System.out.println(user.toString());
 		reservation.setUserId(userService.getUserIdBySnsId(user.getId()));
 		reservationService.setReservation(reservation);
 	}

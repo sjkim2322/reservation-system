@@ -16,9 +16,8 @@ import kr.or.seongjin.reservation.domain.Product;
 import kr.or.seongjin.reservation.domain.Reservation;
 import kr.or.seongjin.reservation.domain.ReservationCount;
 import kr.or.seongjin.reservation.domain.ReservationDTO;
-import kr.or.seongjin.reservation.dto.User;
+import kr.or.seongjin.reservation.dto.ReservationUser;
 import kr.or.seongjin.reservation.service.ReservationService;
-import kr.or.seongjin.reservation.service.UserService;
 
 @RestController
 @RequestMapping("/api/reservations")
@@ -26,18 +25,13 @@ public class ReservationController {
 
 	
 	private ReservationService reservationService;
-	private UserService userService;
 	
 	@Autowired
 	void setProductService(ReservationService reservationService) {
 		this.reservationService = reservationService;
 	}
 	
-	@Autowired
-	void setProductService(UserService userService) {
-		this.userService = userService;
-	}
-	
+
 	@GetMapping("/{id}")
 	public Product getReservation(@PathVariable Integer id) {
 		return null;
@@ -45,9 +39,9 @@ public class ReservationController {
 
 	@GetMapping
 	public List<ReservationDTO> getReservationByUserId(HttpSession session) {
-		User user = (User)session.getAttribute("user");
+		ReservationUser user = (ReservationUser)session.getAttribute("user");
 		try {
-			return reservationService.getReservationByUser(userService.getUserIdBySnsId(user.getId()));
+			return reservationService.getReservationByUser(user.getId());
 		} catch (Exception e) {
 			// TODO exception
 			e.printStackTrace();
@@ -57,9 +51,9 @@ public class ReservationController {
 	
 	@GetMapping("/count")
 	public List<ReservationCount> getReservationCountByUserId(HttpSession session) {	
-		User user = (User)session.getAttribute("user");
+		ReservationUser user = (ReservationUser)session.getAttribute("user");
 		try {
-			return reservationService.getReservationCountByUser(userService.getUserIdBySnsId(user.getId()));
+			return reservationService.getReservationCountByUser(user.getId());
 		} catch (Exception e) {
 			//TODO exception
 			e.printStackTrace();
@@ -69,8 +63,8 @@ public class ReservationController {
 	
 	@PostMapping
 	public void serReservation(HttpSession session, @RequestBody Reservation reservation) throws Exception {
-		User user = (User)session.getAttribute("user");
-		reservation.setUserId(userService.getUserIdBySnsId(user.getId()));
+		ReservationUser user = (ReservationUser)session.getAttribute("user");
+		reservation.setUserId(user.getId());
 		reservationService.setReservation(reservation);
 	}
 }

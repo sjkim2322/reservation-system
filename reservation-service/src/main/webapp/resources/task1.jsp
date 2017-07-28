@@ -106,6 +106,3 @@ $('#categoryTable').on('click','.delete',function() {
 	 }
 	});
 });	
-
-	
-

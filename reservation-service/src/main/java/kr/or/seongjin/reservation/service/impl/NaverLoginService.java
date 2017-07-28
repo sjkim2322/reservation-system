@@ -19,6 +19,8 @@ import org.springframework.web.client.RestTemplate;
 import kr.or.seongjin.reservation.dao.UserDao;
 import kr.or.seongjin.reservation.dto.NaverLoginToken;
 import kr.or.seongjin.reservation.dto.NaverToken;
+import kr.or.seongjin.reservation.dto.NaverUser;
+import kr.or.seongjin.reservation.dto.ReservationUser;
 import kr.or.seongjin.reservation.dto.User;
 import kr.or.seongjin.reservation.service.LoginService;
 
@@ -49,16 +51,16 @@ public class NaverLoginService implements LoginService {
 
 	@Override
 	public String requestCertification(HttpSession session,String originPath) throws UnsupportedEncodingException {
-		System.out.println(originPath);
+		String encodedOriginPath = URLEncoder.encode(originPath,"UTF-8");
 		session.setAttribute("state", getState());
 		String apiUrl = CERTIFICATE_URI + "client_id=" + ClIENT_ID + "&response_type=code" + "&redirect_uri="
-				+ URLEncoder.encode(REDIRECT_URI+"?originPath="+originPath, "UTF-8") + "&state=" + session.getAttribute("state");
+				+ URLEncoder.encode(REDIRECT_URI+"?originPath="+encodedOriginPath, "UTF-8") + "&state=" + session.getAttribute("state");
 		return apiUrl;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public User requestUserInfo(String code, String state) {
+	public NaverUser requestUserInfo(String code, String state) {
 		RestTemplate restTemplate = new RestTemplate();
 		NaverToken naverToken = restTemplate
 				.getForObject(
@@ -76,10 +78,9 @@ public class NaverLoginService implements LoginService {
 	}
 
 	@Override
-	public User logIn(User user) {
-		
-		User alreadyUser = selectUser(user.getId());
-		if(alreadyUser.getId()==null) {
+	public User naverLogIn(NaverUser user) {
+		ReservationUser alreadyUser = selectUser(user.getSnsId());
+		if(alreadyUser==null) {
 			Integer newUserId = userDao.insert(user);
 			return userDao.selectUser(newUserId);
 		}
@@ -88,7 +89,7 @@ public class NaverLoginService implements LoginService {
 		}
 	}
 
-	private User selectUser(Integer id) {
+	private ReservationUser selectUser(Integer id) {
 		return userDao.selectUser(id);
 	}
 

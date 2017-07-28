@@ -4,9 +4,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.seongjin.reservation.dto.User;
+import kr.or.seongjin.reservation.dto.ReservationUser;
 
 @Controller
 public class MainController {
@@ -38,13 +39,23 @@ public class MainController {
     public String myreservation(){
         return "myreservation";
     }
+	
 	@GetMapping("/session/user")
 	@ResponseBody
-	public User getUserFromSession(HttpSession session) {
-		return  (User) session.getAttribute("user");
+	public ReservationUser getUserFromSession(HttpSession session) {
+		return  (ReservationUser) session.getAttribute("user");
 	}
+	
+	@GetMapping("/products/{productId}/comments")
+    public String comments(@PathVariable Integer productId){
+        return "review";
+    }
+	
 
-
+	@GetMapping("/review")
+    public String review(){
+        return "reviewWrite";
+    }
   
     
 }

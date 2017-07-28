@@ -40,10 +40,20 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<ReservationDTO> getReservationByUser(int userId) throws Exception {
 		List<ReservationDTO> list =reservationDao.selectReservationByUser(userId);
 		if(list == null){
-			//다른 exception
+			//exception
 			throw new Exception();
 		}
 		return list;
+	}
+
+	@Override
+	public void modifyReservationTypeById(int id, int type) {
+		if(0 <= type && type <= 3) {
+			reservationDao.updateReservationTypeById(id, type);
+		}else{
+			//exception
+			return;
+		}
 	}
 	
 

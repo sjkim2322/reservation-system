@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.seongjin.reservation.domain.Product;
@@ -66,5 +68,10 @@ public class ReservationController {
 		ReservationUser user = (ReservationUser)session.getAttribute("user");
 		reservation.setUserId(user.getId());
 		reservationService.setReservation(reservation);
+	}
+	
+	@PutMapping("/{id}")
+	public void modifyReservationTypeById(@PathVariable int id, @RequestBody int type) {
+		reservationService.modifyReservationTypeById(id, type);
 	}
 }

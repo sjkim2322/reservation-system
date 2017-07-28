@@ -38,13 +38,17 @@ public class MainController {
     public String myreservation(){
         return "myreservation";
     }
+	
 	@GetMapping("/session/user")
 	@ResponseBody
 	public User getUserFromSession(HttpSession session) {
 		return  (User) session.getAttribute("user");
 	}
 
-
+	@GetMapping("/review")
+    public String review(){
+        return "reviewWrite";
+    }
   
     
 }

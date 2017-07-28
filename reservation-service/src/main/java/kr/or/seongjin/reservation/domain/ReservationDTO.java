@@ -2,10 +2,12 @@ package kr.or.seongjin.reservation.domain;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class ReservationDTO {
 
 	private String reservationType;
-	private int reservationId;
+	private int id;
 	private int generalTicketCount;
 	private int youthTicketCount;
 	private int childTicketCount;
@@ -19,11 +21,11 @@ public class ReservationDTO {
 	public void setReservationType(String reservationType) {
 		this.reservationType = reservationType;
 	}
-	public int getReservationId() {
-		return reservationId;
+	public int getid() {
+		return id;
 	}
-	public void setReservationId(int reservationId) {
-		this.reservationId = reservationId;
+	public void setid(int id) {
+		this.id = id;
 	}
 	public int getGeneralTicketCount() {
 		return generalTicketCount;
@@ -62,5 +64,9 @@ public class ReservationDTO {
 		this.displayEnd = displayEnd;
 	}
 	
+	@Override
+	public String toString(){
+		return ToStringBuilder.reflectionToString(this);
+	}
 	
 }

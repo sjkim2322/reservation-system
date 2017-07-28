@@ -1,5 +1,8 @@
 package kr.or.seongjin.reservation.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class User {
 
 	private String nickname;
@@ -11,9 +14,6 @@ public class User {
 	private String name;
 	private String email;
 	private String birthday;
-	
-	
-	
 	
 	public String getEmail() {
 		return email;
@@ -71,12 +71,6 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [nickname=" + nickname + ", enc_id=" + enc_id + ", profile_image=" + profile_image + ", age=" + age
-				+ ", gender=" + gender + ", id=" + id + ", name=" + name + ", email=" + email + ", birthday=" + birthday
-				+ "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
 	}
-	
-	
-	
-	
 }

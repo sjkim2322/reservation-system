@@ -1,7 +1,5 @@
 package kr.or.seongjin.reservation.domain;
 
-import java.util.Date;
-
 public class Reservation {
 	private int id;
 	private int productId;
@@ -12,7 +10,6 @@ public class Reservation {
 	private String reservationName;
 	private String reservationTel;
 	private String reservationEmail;
-	private Date reservationDate;
 	private int reservationType;
 	
 	public int getId() {
@@ -69,12 +66,6 @@ public class Reservation {
 	public void setReservationEmail(String reservationEmail) {
 		this.reservationEmail = reservationEmail;
 	}
-	public Date getReservationDate() {
-		return reservationDate;
-	}
-	public void setReservationDate(Date reservationDate) {
-		this.reservationDate = reservationDate;
-	}
 	public int getReservationType() {
 		return reservationType;
 	}
@@ -86,7 +77,6 @@ public class Reservation {
 		return "Reservation [id=" + id + ", productId=" + productId + ", userId=" + userId + ", generalTicketCount="
 				+ generalTicketCount + ", youthTicketCount=" + youthTicketCount + ", childTicketCount="
 				+ childTicketCount + ", reservationName=" + reservationName + ", reservationTel=" + reservationTel
-				+ ", reservationEmail=" + reservationEmail + ", reservationDate=" + reservationDate
-				+ ", reservationType=" + reservationType + "]";
+				+ ", reservationEmail=" + reservationEmail + ", reservationType=" + reservationType + "]";
 	}
 }

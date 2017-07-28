@@ -11,4 +11,6 @@ public class UserSqls {
 			+ "FROM users "
 			+ "WHERE sns_id=:sns_id";
 
+	public final static String SELECT_USER_ID_BY_SNS_ID =
+			"select id from users where sns_id= :sns_id";
 }

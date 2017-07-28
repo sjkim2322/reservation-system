@@ -4,8 +4,8 @@ var HandlebarsModule = (function() {
   var source;
   var template;
 
-  var createTemplate = function(r_position) {
-    position=r_position;
+  var createTemplate = function(handlebarsId) {
+    position=handlebarsId;
     source = position.html();
     template = Handlebars.compile(source);
     return template;
@@ -17,13 +17,17 @@ var HandlebarsModule = (function() {
 
   };
   return {
-    create : function(r_position,data) {
-      var template = cache[r_position.attr("id")];
+    create : function(handlebarsId,data,r_postion) {
+      var template = cache[handlebarsId.attr("id")];
       if(!template){
-        cache[r_position.attr("id")] = createTemplate(r_position);
-        template = cache[r_position.attr("id")];
+        cache[handlebarsId.attr("id")] = createTemplate(handlebarsId);
+        template = cache[handlebarsId.attr("id")];
       }
-      r_position.after(template(data));
+      if(r_postion === undefined) {
+        handlebarsId.after(template(data));
+      }else {
+        r_postion.after(template(data));
+      }
     },
     customHelper : function(helperName, func) {
       Handlebars.registerHelper(helperName,func);

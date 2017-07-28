@@ -46,9 +46,9 @@ public class UserDao {
 			Map<String, ?> params = Collections.singletonMap("sns_id", id);
 			return jdbc.queryForObject(UserSqls.SELECT_USER_BY_SNS_ID, params, rowMapper);
 		}
-
-	   
-
-	    
-
+		
+		public Integer selectUserIdBySnsId(int id) {
+			Map<String, ?> params = Collections.singletonMap("sns_id", id);
+			return jdbc.queryForObject(UserSqls.SELECT_USER_ID_BY_SNS_ID, params, Integer.class);
+		}
 }

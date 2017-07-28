@@ -20,37 +20,33 @@ import kr.or.seongjin.reservation.domain.ReservationCount;
 import kr.or.seongjin.reservation.domain.ReservationDTO;
 
 @Repository
-public class ReservationDAOImpl implements ReservationDAO{
+public class ReservationDao{
 
 	private NamedParameterJdbcTemplate jdbc; 
     private SimpleJdbcInsert insertAction; 
     private RowMapper<ReservationCount> reservationCountRowMapper = BeanPropertyRowMapper.newInstance(ReservationCount.class);
     private RowMapper<ReservationDTO> reservationDtoRowMapper = BeanPropertyRowMapper.newInstance(ReservationDTO.class); 
     
-    public ReservationDAOImpl(DataSource dataSource) {
+    public ReservationDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource); 
         this.insertAction = new SimpleJdbcInsert(dataSource) 
                 .withTableName("reservation_info")   
                 .usingGeneratedKeyColumns("id"); 
     }
 	
-	@Override
 	public int insertReservation(Reservation reservation) {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(reservation);
+		
         return insertAction.executeAndReturnKey(params).intValue();
 	}
 
-	@Override
 	public List<ReservationCount> selectReservationCountByUser(int userId) {
 		Map<String, ?> params = Collections.singletonMap("id", userId);
 		return jdbc.query(ReservationSqls.SELECT_COUNT_BY_TYPE, params, reservationCountRowMapper);
 	}
 
-	@Override
 	public List<ReservationDTO> selectReservationByUser(int userId) {
 		Map<String, ?> params = Collections.singletonMap("id", userId);
 		return jdbc.query(ReservationSqls.SELECT_MY_RESERVATION, params, reservationDtoRowMapper);
 	}
-
-	
 }

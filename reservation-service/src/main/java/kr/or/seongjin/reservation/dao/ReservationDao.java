@@ -1,6 +1,7 @@
 package kr.or.seongjin.reservation.dao;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,5 +49,12 @@ public class ReservationDao{
 	public List<ReservationDTO> selectReservationByUser(int userId) {
 		Map<String, ?> params = Collections.singletonMap("id", userId);
 		return jdbc.query(ReservationSqls.SELECT_MY_RESERVATION, params, reservationDtoRowMapper);
+	}
+	
+	public void updateReservationTypeById(int id, int type){
+		Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        params.put("type", type);
+		jdbc.update(ReservationSqls.UPDATE_RESERVATION_TYPE_BY_ID, params);
 	}
 }

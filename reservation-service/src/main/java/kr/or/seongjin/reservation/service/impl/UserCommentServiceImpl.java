@@ -32,8 +32,8 @@ public class UserCommentServiceImpl implements UserCommentService {
 	}
 	
 	@Override
-	public List<UserComment> listUserCommentByProductId(Integer productId) {
-		return ListFilter(userCommentDao.listByProductId(productId));
+	public List<UserComment> listUserCommentByProductId(Integer productId,Integer limit,Integer page) {
+		return ListFilter(userCommentDao.listByProductId(productId,limit,page));
 	}
 
 	@Override

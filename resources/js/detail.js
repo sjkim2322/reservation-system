@@ -165,27 +165,46 @@ var resv_ProductTitleDetail = (function() {
   }
 })();
 
+function Popup(){
+
+};
+
+Popup.prototype = new eg.Component();
+Popup.prototype.constructor = Popup;
+Popup.prototype.showPopup = function(){
+
+    this.trigger("clickPopup");
+};
+
 
 //한줄평 모듈
 var resv_reviews = (function() {
 
-  var   flicking = new FlickingModule();
+  var flicking = new FlickingModule();
+  var popup = new Popup();
+
   //함수
   var addEvent = function() {
     $('div.thumb_area').on('click','a.thumb',function(){
 
       HandlebarsModule.create($('#product-photoviews-template'),($(this).data('imglist')));
-      flicking.init($('ul.popup_img'));
+      popup.showPopup.call(popup);
+
     })
-  }
+  };
 
   return {
     drawReviews : function(reviews){
       HandlebarsModule.create($('#product-reviews-template'),reviews);
       addEvent();
+      popup.on("clickPopup",function(){
+          flicking.init($('ul.popup_img'));
+      })
     }
   }
 })();
+
+
 
 
 

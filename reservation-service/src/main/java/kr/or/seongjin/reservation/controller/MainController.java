@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.seongjin.reservation.dto.User;
@@ -43,6 +44,12 @@ public class MainController {
 	public User getUserFromSession(HttpSession session) {
 		return  (User) session.getAttribute("user");
 	}
+	
+	@GetMapping("/products/{productId}/comments")
+    public String comments(@PathVariable Integer productId){
+        return "review";
+    }
+	
 
 
   

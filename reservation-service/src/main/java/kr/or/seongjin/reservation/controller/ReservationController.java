@@ -58,15 +58,9 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/count")
-	public List<ReservationCount> getReservationCountByUserId(HttpSession session) {	
+	public List<ReservationCount> getReservationCountByUserId(HttpSession session) throws Exception {	
 		User user = (User)session.getAttribute("user");
-		try {
-			return reservationService.getReservationCountByUser(userService.getUserIdBySnsId(user.getId()));
-		} catch (Exception e) {
-			//TODO exception
-			e.printStackTrace();
-		}
-		return null;
+		return reservationService.getReservationCountByUser(userService.getUserIdBySnsId(user.getId()));
 	}
 	
 	@PostMapping

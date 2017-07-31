@@ -1,26 +1,14 @@
 package kr.or.seongjin.reservation.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.net.URLEncoder;
-import java.security.SecureRandom;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 
-import kr.or.seongjin.reservation.dao.UserDao;
-import kr.or.seongjin.reservation.dto.NaverLoginToken;
-import kr.or.seongjin.reservation.dto.NaverToken;
 import kr.or.seongjin.reservation.dto.User;
 import kr.or.seongjin.reservation.service.LoginService;
 

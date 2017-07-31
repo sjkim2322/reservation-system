@@ -13,12 +13,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import kr.or.seongjin.logger.LoggerInterceptor;
 import kr.or.seongjin.reservation.controller.SecurityInterceptor;
 
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"kr.or.seongjin.reservation.controller"})
+@ComponentScan(basePackages = {
+		"kr.or.seongjin.reservation.controller",
+		})
 public class ServletContextConfig extends WebMvcConfigurerAdapter {
 
 	  @Bean
@@ -60,10 +63,13 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		//login interceptor
 		registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/myreservation/**")
 		.addPathPatterns("/reservation/**")
 		.addPathPatterns("/api/reservation/**")
 		.addPathPatterns("/session/**");
+		
+		super.addInterceptors(registry);
 	}
 	  
 }

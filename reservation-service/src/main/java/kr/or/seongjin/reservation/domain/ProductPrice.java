@@ -2,6 +2,8 @@ package kr.or.seongjin.reservation.domain;
 
 import java.sql.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class ProductPrice {
 	
 	private Integer id;
@@ -12,13 +14,6 @@ public class ProductPrice {
 	private Date create_date;
 	private Date modify_date;
 	
-	
-	@Override
-	public String toString() {
-		return "ProductPrice [id=" + id + ", product_id=" + product_id + ", price_type=" + price_type + ", price="
-				+ price + ", discount_rate=" + discount_rate + ", create_date=" + create_date + ", modify_date="
-				+ modify_date + "]";
-	}
 	public Integer getId() {
 		return id;
 	}
@@ -62,6 +57,8 @@ public class ProductPrice {
 		this.modify_date = modify_date;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}	
 }

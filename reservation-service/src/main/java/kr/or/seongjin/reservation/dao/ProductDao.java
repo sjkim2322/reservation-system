@@ -17,8 +17,6 @@ import kr.or.seongjin.reservation.dao.sql.ProductSqls;
 import kr.or.seongjin.reservation.domain.Product;
 import kr.or.seongjin.reservation.domain.ProductPrice;
 
-
-
 @Repository
 public class ProductDao {
 
@@ -63,7 +61,7 @@ public class ProductDao {
     	return jdbc.queryForObject(ProductSqls.SELECT_PLACE_NAME_BY_PRODUCT_ID,params,String.class); 
     }
     
-    public Product selectByProductId(Integer productId) {
+    public Product selectByProductId(Integer productId) throws Exception{
     	Map<String, ?> params = Collections.singletonMap("id", productId);
     	 return jdbc.queryForObject(ProductSqls.SELECT_BY_PRODUCT_ID, params, rowMapper);
     }

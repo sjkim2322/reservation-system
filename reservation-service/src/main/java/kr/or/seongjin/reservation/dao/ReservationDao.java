@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import kr.or.seongjin.reservation.dao.sql.ReservationSqls;
+import kr.or.seongjin.reservation.domain.ProductPrice;
 import kr.or.seongjin.reservation.domain.Reservation;
 import kr.or.seongjin.reservation.domain.ReservationCount;
 import kr.or.seongjin.reservation.domain.ReservationDTO;
@@ -26,7 +27,8 @@ public class ReservationDao{
 	private NamedParameterJdbcTemplate jdbc; 
     private SimpleJdbcInsert insertAction; 
     private RowMapper<ReservationCount> reservationCountRowMapper = BeanPropertyRowMapper.newInstance(ReservationCount.class);
-    private RowMapper<ReservationDTO> reservationDtoRowMapper = BeanPropertyRowMapper.newInstance(ReservationDTO.class); 
+    private RowMapper<ReservationDTO> reservationDtoRowMapper = BeanPropertyRowMapper.newInstance(ReservationDTO.class);
+    private RowMapper<ProductPrice> productPriceRowMapper = BeanPropertyRowMapper.newInstance(ProductPrice.class);
     
     public ReservationDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource); 
@@ -49,6 +51,11 @@ public class ReservationDao{
 	public List<ReservationDTO> selectReservationByUser(int userId) {
 		Map<String, ?> params = Collections.singletonMap("id", userId);
 		return jdbc.query(ReservationSqls.SELECT_MY_RESERVATION, params, reservationDtoRowMapper);
+	}
+	
+	public List<ProductPrice> selectReservationPriceByType(int userId) {
+		Map<String, ?> params = Collections.singletonMap("id", userId);
+		return jdbc.query(ReservationSqls.SELECT_MY_RESERVATION_PRICE_BY_TYPE, params, productPriceRowMapper);
 	}
 	
 	public void updateReservationTypeById(int id, int type){

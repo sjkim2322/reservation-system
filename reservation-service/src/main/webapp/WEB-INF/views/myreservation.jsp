@@ -242,12 +242,43 @@
 			decrement: function(type){
 				type.html(--count[1]);
 			},
+			countCheck : function(){
+				console.log(count);
+			}
 		}
 	})();
 	Count.getCount();
 
 	
 	var Reservation = (function(){
+		var pop = $("div.popup_booking_wrapper");
+		
+		popup = function(){
+			$(".booking_cancel").on("click", function(event){
+				var wrapper = pop; 
+				wrapper.fadeIn(1000)
+				wrapper.css("display", "block");
+				reject();
+				cancelReservation(event);
+			});
+		};
+		
+		reject = function(){
+			$("div.btn_gray, a.popup_btn_close").on("click", function(){
+				pop.fadeOut( 1000, function() {
+					$("div.btn_green").off("click");
+					pop.css("display", "none");
+				});
+			});
+		}
+		cancelReservation = function(){
+				var reservationInfoView = $(event.target).closest("div.card_detail");
+				var view =reservationInfoView.find($("em.booking_number"));
+				var id = view.data('id');
+				$("div.btn_green").on("click", function(){
+					modifyReservationType(id, 3, reservationInfoView);
+				})
+		};
 		
 		moveReservation = function(view){
 			var content = view.closest("article.card_item");
@@ -257,10 +288,9 @@
 		};
 		
 		modifyReservationType = function(id, type, view){
-			$("div.popup_booking_wrapper").fadeOut( 1000, function() {
-				$("div.popup_booking_wrapper").css("display", "none");
-				moveReservation(view);
-				updateReservationType(id, type);
+			pop.fadeOut( 1000, function() {
+				pop.css("display", "none");
+				updateReservationType(id, type, view);
 			});
 		}
 		
@@ -293,44 +323,23 @@
 		   		  $("li.card.two").append(str[1]);
 		   		  $("li.card.three").append(str[2]);
 		   		  $("li.card.four").append(str[3]);
-		   		  init();
+		   		  popup();
 			}
 		}
 		
-		init = function(){
-			$(".booking_cancel").on("click", function(event){
-				var wrapper = $("div.popup_booking_wrapper"); 
-				wrapper.fadeIn(w1000)
-				wrapper.css("display", "block");
-				reject();
-				cancelReservation(event);
-			});
-			
-		};
-		reject = function(){
-			$("div.btn_gray, a.popup_btn_close").on("click", function(){
-				 $("div.popup_booking_wrapper").fadeOut( 1000, function() {
-						$("div.popup_booking_wrapper").css("display", "none");
-				});
-			});
-		}
-		cancelReservation = function(){
-				var reservationInfoView = $(event.target).closest("div.card_detail");
-				var view =reservationInfoView.find($("em.booking_number"));
-				var id = view.data('id');
-				$("div.btn_green").on("click", function(){
-						modifyReservationType(id, 3,  reservationInfoView);
-				})
-		};
-		updateReservationType = function(id, type){
+		
+		updateReservationType = function(id, type, view){
 			$.ajax({
 				type:"put",
 				url:"/api/reservations/" + id,
 				data : JSON.stringify(type),
 				contentType: "application/json; charset=utf-8",
 				success:function(){
+					console.log("ddd");
+					Count.countCheck();
 					Count.increment($("i.spr_book2.ico_back ~ span.figure"));
 					Count.decrement($("i.spr_book2.ico_book_ss ~ span.figure"));
+					moveReservation(view);
 				}
 			});
 		}
@@ -468,7 +477,7 @@
 								</em>
                                         </div>
                                         <!-- [D] 예약 신청중, 예약 확정 만 취소가능, 취소 버튼 클릭 시 취소 팝업 활성화 -->
-							<div class="booking_cancel">
+									<div class="bookingl">
                                             <button class="btn"><span>예매자 리뷰 남기기</span></button>
                                         </div>
                                     </div>

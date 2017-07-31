@@ -100,7 +100,7 @@
                             <div class="agreement_nessasary help_txt"> <span class="spr_book ico_nessasary"></span> <span>필수입력</span> </div>
                             <form class="form_horizontal">
                                 <div class="inline_form"> <label class="label" for="name"> <span class="spr_book ico_nessasary">필수</span> <span class="valid">예매자</span> </label>
-                                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="{{user.name}}" maxlength="17"> </div>
+                                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="{{user.username}}" maxlength="17"> </div>
                                 </div>
                                 <div class="inline_form"> <label class="label" for="tel"> <span class="spr_book ico_nessasary">필수</span> <span>연락처</span> </label>
                                     <div class="inline_control"> <input type="tel" name="tel" id="tel" class="tel" value="" placeholder="휴대폰 입력 시 예매내역 문자발송"> </div>

@@ -3,7 +3,7 @@ var ProductName = (function() {
   var productId = $(location).attr('href').split('/')[4];
   var productNamePromise =
     $.ajax({
-      url : '/api/productList/' + productId + "/productName",
+      url : '/api/products/' + productId + "/productName",
       type :'GET'
     });
   $.when(productNamePromise).done(function(result){
@@ -145,11 +145,11 @@ var FinalInsert = (function() {
     console.log(postData.fileList);
 
     $.ajax({
-      url : "/api/userComment",
+      url : "/api/comments",
       type :'POST',
       data : postData,
       success : function() {
-        console.log("!@#");
+        alert("succeessssssssssss");
       }
     });
   })

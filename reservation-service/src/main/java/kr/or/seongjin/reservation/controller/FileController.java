@@ -34,6 +34,11 @@ public class FileController {
 		this.fileService = fileService;
 	}
 
+    @GetMapping(path = "/fileManage")
+    public String file(){
+        return "files";
+    }
+    
 	@PostMapping
 	@ResponseBody
 	public List<Integer> create(@RequestParam("file") MultipartFile[] files,HttpSession session,HttpServletResponse response) throws IOException {

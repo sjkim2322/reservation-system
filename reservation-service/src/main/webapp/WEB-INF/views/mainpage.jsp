@@ -119,7 +119,7 @@
 	</script>
 	<script id="product-template" type="text/x-handlebars-template">
 	<li class='item'>
-	<a href='/productDetail/{{id}}' class='item_book'>
+	<a href='/products/{{id}}' class='item_book'>
 			<div class='item_preview'>
 			 		<img alt='{{name}}'class='img_thumb' src='/files/{{imgPath}}'>
 			  	<span class='img_border'></span>

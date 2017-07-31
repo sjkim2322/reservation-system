@@ -166,7 +166,7 @@ var resv_product = (function(){
 
 	var requestProduct = function(categoryId) {
 			$.ajax({
-				url:'/api/productList/categories/'+categoryId,
+				url:'/api/categories/' + categoryId + "/products",
 				dataType:'json',
 				type:'GET',
 				headers:{

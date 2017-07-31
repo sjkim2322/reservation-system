@@ -10,7 +10,7 @@ var resv_ProductDetail = (function () {
   var requestDetailProduct = function() {
     if(productObject === null) {
         $.ajax({
-          url:'/api/productList/'+productId,
+          url:'/api/products/'+productId,
           dataType:'json',
           type:'get',
           success:titleInit
@@ -19,7 +19,7 @@ var resv_ProductDetail = (function () {
   };
   var requestReviews = function() {
     $.ajax({
-      url:'/api/userComment/'+productId+"?limit=3&page=0",
+      url:'/api/products/'+productId+"/comments?limit=3&page=0",
       dataType:'json',
       type:'get',
       success:reviewInit
@@ -85,7 +85,7 @@ var resv_ProductImg = (function() {
   //함수
   var requestImageList = function(productId) {
     $.ajax({
-      url:'/product/detail/images/'+productId,
+      url:'/api/products/'+ productId + '/images',
       dataType:'json',
       type:'get',
       success:drawImage

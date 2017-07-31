@@ -59,21 +59,10 @@
                     </div>
                 </div>
                 <div class="section_review_list">
-                    <script id="product-reviews-template" type="text/x-handlebars-template">
-					<div class="review_box">
-						{{#if this}}
-						<h3 class="title_h3">예매자 한줄평</h3>
-						<div class="short_review_area">
-							<div class="grade_area">
-								<!-- [D] 별점 graph_value는 퍼센트 환산하여 width 값을 넣어줌 -->
-								<span class="graph_mask"> <em class="graph_value"
-									style="width: {{resHeader 'rate'}}%;"></em>
-								</span> <strong class="text_value"> <span>{{resHeader 'avgScore'}}</span> <em
-									class="total">5.0</em>
-								</strong> <span class="join_count"><em class="green">{{resHeader 'totalCount'}}건</em> 등록</span>
-							</div>
-							<ul class="list_short_review">
-								{{#each this}}
+                <script id="product-reviews-item-template" type="text/x-handlebars-template">
+						<div>
+							{{#each this}}
+								
 								<li class="list_item">
 									<div>
 										{{#if imgList}}
@@ -100,6 +89,26 @@
 									</div>
 								</li>
 								{{/each}}
+					</div>
+
+				</script>
+                    <script id="product-reviews-template" type="text/x-handlebars-template">
+					<div class="review_box">
+						{{#if this}}
+						<h3 class="title_h3">예매자 한줄평</h3>
+						<div class="short_review_area">
+							<div class="grade_area">
+								<!-- [D] 별점 graph_value는 퍼센트 환산하여 width 값을 넣어줌 -->
+								<span class="graph_mask"> <em class="graph_value"
+									style="width: {{resHeader 'rate'}}%;"></em>
+								</span> <strong class="text_value"> <span>{{resHeader 'avgScore'}}</span> <em
+									class="total">5.0</em>
+								</strong> <span class="join_count"><em class="green">{{resHeader 'totalCount'}}건</em> 등록</span>
+							</div>
+							<ul class="list_short_review">
+								{{#> reviewItem}}
+    								
+								{{/reviewItem}}
 							</ul>
 						</div>
 						{{/if}}

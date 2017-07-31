@@ -32,6 +32,10 @@ var HandlebarsModule = (function() {
     customHelper : function(helperName, func) {
       Handlebars.registerHelper(helperName,func);
     },
-    createTemplate : createTemplate
+    setPartial: function(partialName,partialHandlebarsId){
+        var partialSource = partialHandlebarsId.html();
+        Handlebars.registerPartial(partialName, partialSource);
+    },
+    createTemplate:createTemplate
   }
 })();

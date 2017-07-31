@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,6 @@ import kr.or.seongjin.util.FileDto;
 public class FileServiceImpl implements FileService {
 
 	
-	private static final Integer PRODUCT_IMG = 1;
-	private static final Integer REVIEW_IMG = 2;
-	
 	@Value("${spring.file.upload-locations}")
 	private String baseDir;
 	
@@ -35,7 +34,8 @@ public class FileServiceImpl implements FileService {
 	}
 	
 	@Override
-	public boolean addFile(Integer type, MultipartFile[] files) {
+	public List<Integer> addFiles(MultipartFile[] files,Integer userId) {
+		List<Integer> fileIdList = new ArrayList<Integer>();
 		FileDto fileDto = new FileDto();
 		if (files != null && files.length > 0) {
 			String formattedDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
@@ -49,11 +49,10 @@ public class FileServiceImpl implements FileService {
 				fileDto.setFileName(file.getOriginalFilename());
 				fileDto.setFileLength(file.getSize());
 				fileDto.setSaveFileName(formattedDate + File.separator + UUID.randomUUID().toString()); // 실제 저장되는 파일의
-				fileDto.setUserId(1);
-				fileDto.setDeleteFlag(0);
+				fileDto.setUserId(userId);
+				fileDto.setDeleteFlag(1);
 				fileDto.setCreateDate(new Date());
 				fileDto.setModifyDate(new Date());
-				fileDao.insert(fileDto);// 실제 파일을 저장함.
 
 				// try-with-resource 구문. close()를 할 필요가 없다. java 7 이상에서 가능
 				try (InputStream in = file.getInputStream();
@@ -63,13 +62,14 @@ public class FileServiceImpl implements FileService {
 					while ((readCount = in.read(buffer)) != -1) {
 						fos.write(buffer, 0, readCount);
 					}
+					fileIdList.add(fileDao.insert(fileDto));// 실제 파일을 저장함.
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 			} // for
 		} // if
 		
-		return false;
+		return fileIdList;
 	}
 
 	@Override

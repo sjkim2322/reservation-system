@@ -11,4 +11,5 @@ public interface ReservationService {
 	public int setReservation(Reservation reservation);
 	public List<ReservationCount> getReservationCountByUser(int userId) throws Exception;
 	public List<ReservationDTO> getReservationByUser(int userId) throws Exception;
+	public void modifyReservationTypeById(int id, int type);
 }

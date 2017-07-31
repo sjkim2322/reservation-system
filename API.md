@@ -15,8 +15,16 @@
 2.1 category
 ------------
 <table>
- <th>|URI|method|기능|</th>
- <td>|/categories|GET|전체 카테고리 목록 조회| </td>
+ <tr>
+ <th>URI</th>
+ <th>method</th>
+ <th>기능</th>
+ </tr>
+ <tr>
+ <td> /categories </td>
+ <td> GET </td>
+ <td>전체 카테고리 목록 조회</td>
+ </tr>
 -----------------------------------
 
 /categories

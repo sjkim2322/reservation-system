@@ -19,7 +19,7 @@ var resv_ProductDetail = (function () {
   };
   var requestReviews = function() {
     $.ajax({
-      url:'/api/userComment/'+productId,
+      url:'/api/userComment/'+productId+"?limit=3&page=0",
       dataType:'json',
       type:'get',
       success:reviewInit

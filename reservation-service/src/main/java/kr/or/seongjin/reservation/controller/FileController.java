@@ -36,9 +36,15 @@ public class FileController {
 
 	@PostMapping
 	@ResponseBody
-	public List<Integer> create(@RequestParam("file") MultipartFile[] files,HttpSession session) {
+	public List<Integer> create(@RequestParam("file") MultipartFile[] files,HttpSession session,HttpServletResponse response) throws IOException {
 		ReservationUser  user = (ReservationUser) session.getAttribute("user");
-		return fileService.addFiles(files , user.getId());
+		//session없을때 Redirect필요!
+		if(user==null) {
+			response.setStatus(401);
+			return null;
+		} else {
+			return fileService.addFiles(files , user.getId());
+		}
 	}
 	@GetMapping(path = "/{id}")
 	public void getFile(@PathVariable Integer id,

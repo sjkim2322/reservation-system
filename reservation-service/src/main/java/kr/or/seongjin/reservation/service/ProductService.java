@@ -10,7 +10,7 @@ public interface ProductService {
 
 	public List<Product> selectAllByCategoryForMainPage(int categoryId,int offset);
 	public int countByCategory(int categoryId);
-	public Product getDetailProduct(Integer productId);
+	public Product getDetailProduct(Integer productId) throws Exception;
 	public List<String> getImagesByProductId(Integer productId);
 	public List<ProductPrice> getPricesByProductId(Integer productId);
 }

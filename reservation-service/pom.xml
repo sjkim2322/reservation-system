@@ -11,6 +11,7 @@
 		<source-encoding>UTF-8</source-encoding>
 		<resource-encoding>UTF-8</resource-encoding>
 		<deploy-path>deploy</deploy-path>
+		
 
 		<!-- spring framework -->
 		<spring-framework.version>4.3.5.RELEASE</spring-framework.version>
@@ -195,8 +196,6 @@
 		   <version>1.7.25</version>
 		 </dependency>
 
-
-        
 	</dependencies>
 	
 

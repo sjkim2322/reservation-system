@@ -23,7 +23,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> selectAllByCategoryForMainPage(int categoryId, int offset) {
-
 		if (categoryId == 0)
 			return ListFilter(productDao.selectAll(offset));
 		else
@@ -39,11 +38,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product getDetailProduct(Integer productId) {
+	public Product getDetailProduct(Integer productId) throws Exception {
 		return productDao.selectByProductId(productId);
 	}
-	
-
 
 	@Override
 	public List<String> getImagesByProductId(Integer productId) {

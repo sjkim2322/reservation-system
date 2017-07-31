@@ -14,12 +14,8 @@ import kr.or.seongjin.reservation.dto.ReservationUser;
 @Controller
 public class MainController {
 	
-	 Logger logger = LoggerFactory.getLogger(MainController.class);
-	 
-	
     @GetMapping(path = "/")
     public String index(){
-    	logger.info("Hello World");
         return "mainpage";
     }
     
@@ -61,5 +57,4 @@ public class MainController {
         return "reviewWrite";
     }
   
-    
 }

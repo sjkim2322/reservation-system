@@ -29,7 +29,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/{productId}")
-	public Product getDetailProduct(@PathVariable Integer productId) {
+	public Product getDetailProduct(@PathVariable Integer productId) throws Exception {
 		
 		return productService.getDetailProduct(productId);
 	}

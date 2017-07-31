@@ -1,5 +1,7 @@
 package kr.or.seongjin.reservation.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Reservation {
 	private int id;
 	private int productId;
@@ -74,9 +76,6 @@ public class Reservation {
 	}
 	@Override
 	public String toString() {
-		return "Reservation [id=" + id + ", productId=" + productId + ", userId=" + userId + ", generalTicketCount="
-				+ generalTicketCount + ", youthTicketCount=" + youthTicketCount + ", childTicketCount="
-				+ childTicketCount + ", reservationName=" + reservationName + ", reservationTel=" + reservationTel
-				+ ", reservationEmail=" + reservationEmail + ", reservationType=" + reservationType + "]";
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

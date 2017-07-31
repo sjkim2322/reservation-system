@@ -30,10 +30,7 @@ public class Product {
 	 
 	//In product_img Table for RepresentImg
 	private String imgPath;
-	
-	
-	
-	
+
 	public String getImgPath() {
 		return imgPath;
 	}
@@ -148,8 +145,4 @@ public class Product {
 	public void setEvent(String event) {
 		this.event = event;
 	}
-
-	
-	
-	
 }

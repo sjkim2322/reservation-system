@@ -120,7 +120,7 @@
 <script id="product-reviewImage-template" type="text/x-handlebars-template">
 		{{#each this}}
 		<li class="item" data-id={{this}}>
-			<a href="#" class="anchor">
+			<a class="anchor">
 				<span class="spr_book ico_del">삭제</span>
 			</a>
 				<img src="/files/{{this}}" width="130" alt="" class="item_thumb">
@@ -130,8 +130,10 @@
 </script>
 <script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
 <script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
+<script src="/resources/js/node_modules/@egjs/component/dist/component.js"></script>
 <script src="/resources/js/init.js"></script>
 <script src="/resources/js/handlebarsModule.js"></script>
+<script src="/resources/js/Rating.js"></script>
 <script src="/resources/js/reviewWrite.js"></script>
 
 </html>

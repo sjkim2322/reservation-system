@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -57,7 +56,7 @@ public class ProductDao {
     
     
     public String selectPlaceNameByProductId(int productId) {
-    	Map<String, ?> params = Collections.singletonMap("product_id", productId);
+    	Map<String, ?> params = Collections.singletonMap("productId", productId);
     	return jdbc.queryForObject(ProductSqls.SELECT_PLACE_NAME_BY_PRODUCT_ID,params,String.class); 
     }
     
@@ -79,6 +78,11 @@ public class ProductDao {
 	public List<ProductPrice> selectPricesByProductId(Integer productId) {
 		Map<String, ?> params = Collections.singletonMap("productId", productId);
 		return jdbc.query(ProductSqls.SELECT_PRICES_BY_PRODUCT_ID, params, BeanPropertyRowMapper.newInstance(ProductPrice.class));
+	}
+
+	public String selectProductName(Integer productId) {
+		Map<String, ?> params = Collections.singletonMap("productId", productId);
+		return jdbc.queryForObject(ProductSqls.SELECT_PRODUCT_NAME_BY_PRODUCT_ID, params, String.class);
 	}
 
 }

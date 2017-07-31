@@ -13,10 +13,14 @@ public class ProductSqls {
 	public final static String COUNT_ALL = "SELECT count(*) count  FROM product";
 	public final static String COUNT_BY_CATEGORY = "SELECT count(*) count  FROM product WHERE category_id=:id";
 	
+	public final static String SELECT_PRODUCT_NAME_BY_PRODUCT_ID =
+			"SELECT name "
+			+ "FROM product "
+			+ "WHERE id = :productId";
 	public final static String SELECT_PLACE_NAME_BY_PRODUCT_ID = 
 			"SELECT place_name "
 			+ "FROM display_info "
-			+ "WHERE product_id = :product_id";
+			+ "WHERE product_id = :productId";
 	public static final String SELECT_BY_PRODUCT_ID = 
 			"SELECT * "
 			+ "FROM  (display_info A right outer join product_detail B on A.product_id = B.product_id ) right outer join product C on B.product_id= C.id "

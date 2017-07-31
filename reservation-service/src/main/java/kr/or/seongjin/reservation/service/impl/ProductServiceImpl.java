@@ -75,4 +75,10 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return productList;
 	}
+
+
+	@Override
+	public String getProductName(Integer productId) {
+		return productDao.selectProductName(productId);
+	}
 }

@@ -23,20 +23,32 @@ public class UserCommentDao {
 	
 	 	private NamedParameterJdbcTemplateHandlingNull jdbc; // sql 을 실행하기 위해 사용되는 객체
 	    private SimpleJdbcInsert insertAction; // insert 를 편리하게 하기 위한 객체
+	    private SimpleJdbcInsert insertActionForImage;
 	    private RowMapper<UserComment> rowMapper = BeanPropertyRowMapper.newInstance(UserComment.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
-
 	    public UserCommentDao(DataSource dataSource) {
 	        this.jdbc = new NamedParameterJdbcTemplateHandlingNull(dataSource);
 	        this.insertAction = new SimpleJdbcInsert(dataSource)
 	                .withTableName("reservation_user_comment")
 	                .usingGeneratedKeyColumns("id");
+	        this.insertActionForImage = new SimpleJdbcInsert(dataSource)
+	                .withTableName("reservation_user_comment_image")
+	                .usingGeneratedKeyColumns("id");
+	        
 	    }
 
 	    //Create
-	    public int insert(UserComment userComment){
+	    public int insertComment(UserComment userComment){
 	        SqlParameterSource params = new BeanPropertySqlParameterSource(userComment);
 	        return insertAction.executeAndReturnKey(params).intValue();
 	    }
+	    
+	    public Integer insertCommentImage(Integer fileId,Integer userCommentId) {
+	    	Map<String, Object> params = new HashMap<>();
+	    	params.put("file_id", fileId);
+			params.put("reservation_user_comment_id",userCommentId);
+			return insertActionForImage.executeAndReturnKey(params).intValue();
+		}
+
 	    
 	    //Read
 	    public UserComment selectById(Integer id){
@@ -70,6 +82,10 @@ public class UserCommentDao {
 			Map<String, Object> params =Collections.singletonMap("productId", productId);
 			return jdbc.queryForObject(UserCommentSqls.SELECT_TOTAL_COUNT,params,Integer.class);
 		}
+
+	
+
+		
 	    
 	    //Update
 	    

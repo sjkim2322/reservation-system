@@ -13,4 +13,5 @@ public interface ProductService {
 	public Product getDetailProduct(Integer productId) throws Exception;
 	public List<String> getImagesByProductId(Integer productId);
 	public List<ProductPrice> getPricesByProductId(Integer productId);
+	public String getProductName(Integer productId);
 }

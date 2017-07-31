@@ -46,13 +46,13 @@ public class MainController {
 		return  (ReservationUser) session.getAttribute("user");
 	}
 	
-	@GetMapping("/products/{productId}/comments")
-    public String comments(@PathVariable Integer productId){
+	@GetMapping("/products/{id:[\\d]+}/comments")
+    public String comments(){
         return "review";
     }
 	
 
-	@GetMapping("/review")
+	@GetMapping("/products/{id:[\\d]+}/review")
     public String review(){
         return "reviewWrite";
     }

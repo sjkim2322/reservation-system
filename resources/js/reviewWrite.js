@@ -1,4 +1,23 @@
 //console.log($('input.hidden_input'));
+var ProductName = (function() {
+  var productId = $(location).attr('href').split('/')[4];
+  var productNamePromise =
+    $.ajax({
+      url : '/api/productList/' + productId + "/productName",
+      type :'GET'
+    });
+  $.when(productNamePromise).done(function(result){
+    $('div.top_title span.title').text(result);
+  });
+
+  var getProductId = function() {
+    return productId;
+  }
+
+  return {
+    getProductId : getProductId
+  }
+})();
 var ReviewRating = (function() {
   var rt = new Rating($("div.rating"),"rating_rdo","checked");
   var starRank = $('span.star_rank');
@@ -116,10 +135,11 @@ var FinalInsert = (function() {
   var postBtn = $('div.box_bk_btn > .bk_btn');
   var postData = {};
   postBtn.on('click',function(){
-    postData.productId = 13;
+    postData.productId = ProductName.getProductId();
     postData.score = ReviewRating.getScore();
     postData.comment = ReviewWrite.getText();
     postData.fileList = FileUpload.getFinalFileList();
+    console.log(postData.productId);
     console.log(postData.score);
     console.log(postData.comment);
     console.log(postData.fileList);

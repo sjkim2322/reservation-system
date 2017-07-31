@@ -1,17 +1,14 @@
 package kr.or.seongjin.reservation.controller;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.seongjin.reservation.domain.Product;
@@ -39,4 +36,11 @@ public class ProductController {
 		response.addIntHeader("totalCount", productService.countByCategory(categoryId));
 		return productService.selectAllByCategoryForMainPage(categoryId,Integer.parseInt(request.getHeader("offset")));
 	}
+	
+	@GetMapping(path="/{productId}/productName",produces = "application/text; charset=utf8" )
+	public String getProductName(@PathVariable Integer productId,HttpServletResponse  response) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		return productService.getProductName(productId);
+	}
+	
 }

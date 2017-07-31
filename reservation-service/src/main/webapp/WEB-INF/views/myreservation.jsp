@@ -241,7 +241,7 @@
 			},
 			decrement: function(type){
 				type.html(--count[1]);
-			},
+			}
 		}
 	})();
 	Count.getCount();
@@ -300,7 +300,7 @@
 		init = function(){
 			$(".booking_cancel").on("click", function(event){
 				var wrapper = $("div.popup_booking_wrapper"); 
-				wrapper.fadeIn(w1000)
+				wrapper.fadeIn(1000)
 				wrapper.css("display", "block");
 				reject();
 				cancelReservation(event);

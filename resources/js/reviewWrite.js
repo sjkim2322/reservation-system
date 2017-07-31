@@ -10,7 +10,15 @@ var ReviewRating = (function() {
       starRank.removeClass('gray_star');
       starRank.text(data.score);
     }
-  })
+  });
+
+  var getScore = function() {
+    return starRank.text();
+  }
+
+  return {
+    getScore : getScore
+  }
 
 })();
 
@@ -28,17 +36,24 @@ var ReviewWrite = (function() {
     }
   });
 
-  textArea.on('keydown',function() {
-    $('div.guide_review > span:first').text(this.value.length);
-    if(this.value.length === 10) {
+  textArea.on('keydown',function(event) {
+    if(this.value.length >= 400 && event.keyCode !=8) {
       alert("최대 400자만 입력할 수 있습니다.")
       return false;
+    } else {
+      $('div.guide_review > span:first').text(this.value.length);
+      return true;
+    }
+  });
+  var getText = function() {
+      return textArea.val();
+  }
+
+    return {
+      getText : getText
     }
 
-  });
 })();
-
-
 
 
 var FileUpload = (function(){
@@ -81,21 +96,47 @@ var FileUpload = (function(){
     previewImagePosition.on("click","li > a.anchor",function(){
       $(this).parent().remove();
     });
+  }
 
-    $('.bk_btn').on("click",function(){
-      finalFileList = new Array();
-      previewImagePosition.children().each(function(){
-        finalFileList.push($(this).data('id'));
-      });
-      console.log(finalFileList);
+  var getFinalFileList = function() {
+    finalFileList = new Array();
+    previewImagePosition.children().each(function(){
+      finalFileList.push($(this).data('id'));
     });
+    return finalFileList;
   }
 
   return {
-    init : init
+    init : init,
+    getFinalFileList : getFinalFileList
   }
 })();
+
+var FinalInsert = (function() {
+  var postBtn = $('div.box_bk_btn > .bk_btn');
+  var postData = {};
+  postBtn.on('click',function(){
+    postData.productId = 13;
+    postData.score = ReviewRating.getScore();
+    postData.comment = ReviewWrite.getText();
+    postData.fileList = FileUpload.getFinalFileList();
+    console.log(postData.score);
+    console.log(postData.comment);
+    console.log(postData.fileList);
+
+    $.ajax({
+      url : "/api/userComment",
+      type :'POST',
+      data : postData,
+      success : function() {
+        console.log("!@#");
+      }
+    });
+  })
+})();
 FileUpload.init();
+
+
 // var reader = new FileReader();
 // reader.onload = function (e) {
 //     imgTest.attr('src', e.target.result);

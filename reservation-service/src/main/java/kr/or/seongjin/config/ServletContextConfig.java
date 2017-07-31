@@ -13,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import kr.or.seongjin.logger.LoggerInterceptor;
 import kr.or.seongjin.reservation.controller.SecurityInterceptor;
 
 

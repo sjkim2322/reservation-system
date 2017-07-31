@@ -45,10 +45,15 @@ public class UserCommentDao {
 	    }
 	
 	    //Read List
-	    public List<UserComment> listByProductId(Integer productId){
-	        Map<String, Object> params = Collections.singletonMap("productId", productId);
-	        return jdbc.query(UserCommentSqls.LIST3_BY_PRODUCT_ID,params,rowMapper);
+	    public List<UserComment> listByProductId(Integer productId,int limit,int page){
+	    	Map<String, Object> params = new HashMap<>();
+			params.put("productId", productId);
+			params.put("limit",limit);
+			params.put("offset",limit*page);
+	        
+	        return jdbc.query(UserCommentSqls.LIST_BY_PRODUCT_ID,params,rowMapper);
 	    }
+	    
 	    
 	    //Read ImageId List
 	    public List<String> listImageByCommentId(Integer id) {

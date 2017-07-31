@@ -4,7 +4,7 @@ public class NaverLoginToken {
 
 	private String resultCode;
     private String message;
-    private User response;
+    private NaverUser response;
     
 	public String getResultCode() {
 		return resultCode;
@@ -18,10 +18,10 @@ public class NaverLoginToken {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public User getResponse() {
+	public NaverUser getResponse() {
 		return response;
 	}
-	public void setResponse(User response) {
+	public void setResponse(NaverUser response) {
 		this.response = response;
 	}
     

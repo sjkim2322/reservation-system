@@ -17,9 +17,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int getUserIdBySnsId(int id) throws Exception {
+	public int getUserIdBySnsId(int snsId) throws Exception {
 		try{
-			return userDao.selectUserIdBySnsId(id);
+			return userDao.selectUserIdBySnsId(snsId);
 		} catch (Exception e) {
 			//exception
 			throw new Exception();

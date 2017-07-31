@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.or.seongjin.reservation.dto.User;
+import kr.or.seongjin.reservation.dto.NaverUser;
 import kr.or.seongjin.reservation.service.LoginService;
 
 @Controller
@@ -38,8 +38,8 @@ public class LoginController {
 			  HttpSession session) {
 		
 		  if(session.getAttribute("state").equals(state)) {
-			  User user = loginService.requestUserInfo(code,state);
-			  session.setAttribute("user", loginService.logIn(user));
+			  NaverUser user = (NaverUser) loginService.requestUserInfo(code,state);
+			  session.setAttribute("user", loginService.naverLogIn(user));
 			  
 			  System.out.println(originPath);
 			  return "redirect:"+originPath;

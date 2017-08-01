@@ -7,22 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-	
-    @GetMapping("/*")
+
+	@GetMapping("/*")
 	public String detailProduct() {
-		//model.addAttribute("productId",productId);
 		return "detail";
-	} 
-    
+	}
+
 	@GetMapping("/{id:[\\d]+}/reviews")
-    public String comments(){
-        return "review";
-    }
-	
+	public String comments() {
+		return "review";
+	}
 
 	@GetMapping("/{id:[\\d]+}/review/register")
-    public String review(){
-        return "reviewWrite";
-    }
+	public String review() {
+		return "reviewWrite";
+	}
 
 }

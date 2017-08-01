@@ -26,7 +26,7 @@ import kr.or.seongjin.util.FileDto;
 @Controller
 @RequestMapping("/files")
 public class FileController {
-	
+
 	private FileService fileService;
 
 	@Autowired
@@ -34,32 +34,33 @@ public class FileController {
 		this.fileService = fileService;
 	}
 
-    @GetMapping(path = "/fileManage")
-    public String file(){
-        return "files";
-    }
-    
+	@GetMapping(path = "/fileManage")
+	public String file() {
+		return "files";
+	}
+
 	@PostMapping
 	@ResponseBody
-	public List<Integer> create(@RequestParam("file") MultipartFile[] files,HttpSession session,HttpServletResponse response) throws IOException {
-		ReservationUser  user = (ReservationUser) session.getAttribute("user");
-		//session없을때 Redirect필요!
-		if(user==null) {
+	public List<Integer> create(@RequestParam("file") MultipartFile[] files, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		ReservationUser user = (ReservationUser) session.getAttribute("user");
+		// session없을때 Redirect필요!
+		if (user == null) {
 			response.setStatus(401);
 			return null;
 		} else {
-			return fileService.addFiles(files , user.getId());
+			return fileService.addFiles(files, user.getId());
 		}
 	}
+
 	@GetMapping(path = "/{id}")
-	public void getFile(@PathVariable Integer id,
-			HttpServletResponse response) throws IOException {
+	public void getFile(@PathVariable Integer id, HttpServletResponse response) throws IOException {
 		FileDto fileDto = fileService.selectFileById(id);
-		
-		if(fileResponseMapper(fileDto,response)) {
+
+		if (fileResponseMapper(fileDto, response)) {
 			FileInputStream fis;
 			fis = fileService.getFileInputStream(fileDto.getSaveFileName());
-			
+
 			try {
 				FileCopyUtils.copy(fis, response.getOutputStream()); // 파일을 저장할때도 사용할 수 있다.
 				response.getOutputStream().flush();
@@ -68,28 +69,31 @@ public class FileController {
 			} finally {
 				try {
 					fis.close();
-				} catch (Exception ex) {}
+				} catch (Exception ex) {
+				}
 			}
-		} 
-		return ;
+		}
+		return;
 
 	}
+
 	@PutMapping
 	public void registFile() {
-		
+
 	}
-	private boolean fileResponseMapper(FileDto fileDto , HttpServletResponse response) throws IOException {
-		if(fileDto==null) { 
+
+	private boolean fileResponseMapper(FileDto fileDto, HttpServletResponse response) throws IOException {
+		if (fileDto == null) {
 			response.sendRedirect("/resources/img/noimage.png");
 			return false;
 		} else {
 			response.setHeader("Content-Disposition", "inline; filename=\"" + fileDto.getFileName() + "\";");
-			//구브라우저 미구현.
+			// 구브라우저 미구현.
 			response.setHeader("Content-Transfer-Encoding", "binary");
 			response.setHeader("Content-Type", fileDto.getContentType());
 			response.setHeader("Content-Length", "" + fileDto.getFileLength());
 			response.setHeader("Pragma", "no-cache;");
-			response.setHeader("Expires", "-1;");	
+			response.setHeader("Expires", "-1;");
 			return true;
 		}
 	}

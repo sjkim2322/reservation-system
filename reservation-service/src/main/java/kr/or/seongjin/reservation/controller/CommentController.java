@@ -19,29 +19,27 @@ import kr.or.seongjin.reservation.service.UserCommentService;
 @RequestMapping("/api/comments")
 public class CommentController {
 
-	
-	 private UserCommentService userCommentService;
-	 
-	 @Autowired
-	 public void setUserCommentService(UserCommentService userCommentService) {
-			this.userCommentService = userCommentService;
-		}
-	
+	private UserCommentService userCommentService;
+
+	@Autowired
+	public void setUserCommentService(UserCommentService userCommentService) {
+		this.userCommentService = userCommentService;
+	}
+
 	@PostMapping
-	public void insertComment(@RequestParam(value="fileList[]",required= false) List<Integer> fileList,
-							@ModelAttribute UserComment userComment,
-							HttpSession session) {
+	public void insertComment(@RequestParam(value = "fileList[]", required = false) List<Integer> fileList,
+			@ModelAttribute UserComment userComment, HttpSession session) {
 		ReservationUser user = (ReservationUser) session.getAttribute("user");
 		userComment.setUserId(user.getId());
 		userCommentService.insertComment(userComment, fileList);
-		
+
 	}
-//    
-//	
-//	    
-//	@PutMapping
-//	
-//	    
-//	@DeleteMapping
-//	
+	//
+	//
+	//
+	// @PutMapping
+	//
+	//
+	// @DeleteMapping
+	//
 }

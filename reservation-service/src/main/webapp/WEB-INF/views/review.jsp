@@ -96,7 +96,7 @@
 										<div class="info_area">
 											<div class="review_info">
 												<span class="grade">{{score}}</span> <span class="name">{{username}}</span>
-												<span class="date">{{create_date}} 방문</span>
+												<span class="date">{{createDate}} 방문</span>
 											</div>
 										</div>
 									</div>

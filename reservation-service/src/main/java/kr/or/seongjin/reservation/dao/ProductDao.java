@@ -9,15 +9,13 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import kr.or.seongjin.reservation.Exception.ReservationException;
 import kr.or.seongjin.reservation.dao.sql.ProductSqls;
 import kr.or.seongjin.reservation.domain.Product;
 import kr.or.seongjin.reservation.domain.ProductPrice;
-
-
 
 @Repository
 public class ProductDao {
@@ -59,11 +57,11 @@ public class ProductDao {
     
     
     public String selectPlaceNameByProductId(int productId) {
-    	Map<String, ?> params = Collections.singletonMap("product_id", productId);
+    	Map<String, ?> params = Collections.singletonMap("productId", productId);
     	return jdbc.queryForObject(ProductSqls.SELECT_PLACE_NAME_BY_PRODUCT_ID,params,String.class); 
     }
     
-    public Product selectByProductId(Integer productId) {
+    public Product selectByProductId(Integer productId) throws ReservationException {
     	Map<String, ?> params = Collections.singletonMap("id", productId);
     	 return jdbc.queryForObject(ProductSqls.SELECT_BY_PRODUCT_ID, params, rowMapper);
     }
@@ -78,9 +76,14 @@ public class ProductDao {
 		return jdbc.queryForList(ProductSqls.SELECT_IMAGES_BY_PRODUCT_ID, params, String.class);
 	}
 
-	public List<ProductPrice> selectPricesByProductId(Integer productId) {
+	public List<ProductPrice> selectPricesByProductId(int productId) {
 		Map<String, ?> params = Collections.singletonMap("productId", productId);
 		return jdbc.query(ProductSqls.SELECT_PRICES_BY_PRODUCT_ID, params, BeanPropertyRowMapper.newInstance(ProductPrice.class));
+	}
+
+	public String selectProductName(Integer productId) {
+		Map<String, ?> params = Collections.singletonMap("productId", productId);
+		return jdbc.queryForObject(ProductSqls.SELECT_PRODUCT_NAME_BY_PRODUCT_ID, params, String.class);
 	}
 
 }

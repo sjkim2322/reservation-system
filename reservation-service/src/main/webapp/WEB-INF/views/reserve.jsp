@@ -17,17 +17,17 @@
         <div class="header fade">
             <header class="header_tit">
                 <h1 class="logo">
-                    <a href="#" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                    <a href="http://naver.com" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                    <a href="/mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="#" class="btn_my"> <span title="내 예약">MY</span> </a>
+                <a href="/myreservation" class="btn_my"> <span title="내 예약">MY</span> </a>
             </header>
         </div>
         <div class="ct">
             <div class="ct_wrap">
                <script id="product-reservDetail-template" type="text/forHandlebars">
                 <div class="top_title">
-                    <a href="#" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
+                    <a href="/productDetail/{{id}}" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
                     <h2><span class="title">{{name}}</span></h2>
                 </div>
                 <div class="group_visual">
@@ -102,7 +102,7 @@
                             <div class="agreement_nessasary help_txt"> <span class="spr_book ico_nessasary"></span> <span>필수입력</span> </div>
                             <form class="form_horizontal">
                                 <div class="inline_form"> <label class="label" for="name"> <span class="spr_book ico_nessasary">필수</span> <span class="valid">예매자</span> </label>
-                                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="{{user.name}}" maxlength="17"> </div>
+                                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="{{user.username}}" maxlength="17"> </div>
                                 </div>
                                 <div class="inline_form"> <label class="label" for="tel"> <span class="spr_book ico_nessasary">필수</span> <span>연락처</span> </label>
                                     <div class="inline_control"> <input type="tel" name="tel" id="tel" class="tel" value="" placeholder="휴대폰 입력 시 예매내역 문자발송"> </div>
@@ -169,15 +169,16 @@
 <script>
 
 $(".bk_btn_wrap").on("click", function(){
-    var data = new Object();
-    data.productId = $(location).attr('href').split('/')[4];
-    data.generalTicketCount = $("input.count_control_input:eq(0)").val();
-    data.youthTicketCount = $("input.count_control_input:eq(1)").val();
-    data.childTicketCount = $("input.count_control_input:eq(2)").val();
-    data.reservationName = $("input.text").val();
-    data.reservationTel = $("input.tel").val();
-    data.reservationEmail = $("input.email").val();
-
+    var data = {
+	    productId : $(location).attr('href').split('/')[4],
+	    generalTicketCount : $("input.count_control_input:eq(0)").val(),
+	    youthTicketCount : $("input.count_control_input:eq(1)").val(),
+	    childTicketCount : $("input.count_control_input:eq(2)").val(),
+	    reservationName : $("input.text").val(),
+	    reservationTel : $("input.tel").val(),
+	    reservationEmail : $("input.email").val()
+    };
+    
     $.ajax({
       type:'post',
       url:'/api/reservations',

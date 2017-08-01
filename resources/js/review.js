@@ -21,7 +21,7 @@ var resv_reviews = (function() {
 
     var requestReviews = function() {
         $.ajax({
-            url:'/api/userComment/'+productId+"?page=0"+"&limit=10",
+            url:'/api/products/'+productId+"/comments?page=0"+"&limit=10",
             dataType:'json',
             type:'get',
             success:reviewInit
@@ -37,7 +37,7 @@ var resv_reviews = (function() {
         }
 
         $.ajax({
-            url:'/api/userComment/'+productId+"?page="+page+"&limit=10",
+            url:'/api/products/'+productId+"/comments?page="+page+"&limit=10",
             dataType:'json',
             type:'get',
             success:function(data){

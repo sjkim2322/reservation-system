@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.seongjin.reservation.Exception.NotExistProductException;
 import kr.or.seongjin.reservation.dao.ProductDao;
 import kr.or.seongjin.reservation.domain.Product;
 import kr.or.seongjin.reservation.domain.ProductPrice;
@@ -23,7 +24,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> selectAllByCategoryForMainPage(int categoryId, int offset) {
-
 		if (categoryId == 0)
 			return ListFilter(productDao.selectAll(offset));
 		else
@@ -39,11 +39,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product getDetailProduct(Integer productId) {
-		return productDao.selectByProductId(productId);
+	public Product getDetailProduct(Integer productId) throws NotExistProductException {
+		Product product = productDao.selectByProductId(productId);
+		if(product == null){
+			System.out.println("@@");
+			throw new NotExistProductException();
+		} else {
+			return product;
+		}
 	}
-	
-
 
 	@Override
 	public List<String> getImagesByProductId(Integer productId) {
@@ -77,5 +81,11 @@ public class ProductServiceImpl implements ProductService {
 			addRepresentImg(product);
 		}
 		return productList;
+	}
+
+
+	@Override
+	public String getProductName(Integer productId) {
+		return productDao.selectProductName(productId);
 	}
 }

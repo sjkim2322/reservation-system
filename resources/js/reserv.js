@@ -1,5 +1,7 @@
 
+
 var Reserve = (function(){
+
 
     var tickets = [];
 
@@ -159,10 +161,10 @@ var Storage = (function(){
 
     return {
       init : function(){
-          var productPrice = Init.getData('/product/detail/prices/'+ productId);
-          var productImage = Init.getData('/product/detail/images/'+ productId);
-          var product = Init.getData('/api/productList/'+ productId);
-          var user = Init.getData('/session/user');
+          var productPrice = Init.getData('/api/products/' + productId + '/prices');
+          var productImage = Init.getData('/api/products/' + productId + '/images');
+          var product = Init.getData('/api/products/'+ productId);
+          var user = Init.getData('/api/users');
 
           return $.when(productPrice,productImage,product,user);
       },
@@ -183,6 +185,7 @@ var Storage = (function(){
           user = users;
       }
     }
+
 
 })();
 

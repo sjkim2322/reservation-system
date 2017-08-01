@@ -166,7 +166,7 @@ var resv_product = (function(){
 
 	var requestProduct = function(categoryId) {
 			$.ajax({
-				url:'/api/productList/categories/'+categoryId,
+				url:'/api/categories/' + categoryId + "/products",
 				dataType:'json',
 				type:'GET',
 				headers:{
@@ -244,5 +244,13 @@ $('.more').on('click','button.btn',function() {
 	var categoryId = $('li.item > a.active').closest('.item').data('category');
 	resv_product.requestProduct(categoryId);
 });
+$(document).scroll(function(){
+	if($(window).scrollTop() >= $(document).height() - $(window).height()){
+		var categoryId = $('li.item > a.active').closest('.item').data('category');
+		resv_product.requestProduct(categoryId);
+	}
+});
 
 resv_product.requestProduct(0);
+
+

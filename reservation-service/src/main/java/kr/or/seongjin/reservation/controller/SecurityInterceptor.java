@@ -9,12 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-
-
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
-	
-	
-	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -28,7 +23,6 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			//(requestURI, queryString)URL encode
 			return false;
 		}
-		
 	}
 	
 	private String createOriginPath(HttpServletRequest request) {
@@ -45,8 +39,5 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			return "/";
 		}
 	}
-	
-	
-	
 
 }

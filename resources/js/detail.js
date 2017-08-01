@@ -5,27 +5,39 @@ var resv_ProductDetail = (function () {
   var productId = $(location).attr('href').split('/')[4];
   var productObject = null;
   var reviewObject = null;
-
+  var error = function(){
+    // $(location).attr("href", "/");
+  }
   //함수
   var requestDetailProduct = function() {
     if(productObject === null) {
         $.ajax({
-          url:'/api/productList/'+productId,
+          url:'/api/products/'+productId,
           dataType:'json',
           type:'get',
-          success:titleInit
+          success:titleInit,
+          error:function(result){
+            console.log(result.responseText);
+             location.href = result.responseText;
+            // $(location).attr("href", result);
+          }
+
         });
     }
   };
+
+
+
   var requestReviews = function() {
     $.ajax({
-      url:'/api/userComment/'+productId+"?limit=3&page=0",
+      url:'/api/products/'+productId+"/comments?limit=3&page=0",
       dataType:'json',
       type:'get',
       success:reviewInit
     });
   };
   var reviewInit = function(result,status,xhr) {
+    console.log(result);
     reviewObject = result;
     HandlebarsModule.customHelper("resHeader",function(name) {
       if(name === 'rate') {
@@ -41,6 +53,7 @@ var resv_ProductDetail = (function () {
     resv_reviews.drawReviews(reviewObject);
   }
   var titleInit = function(result) {
+    console.log(result);
     productObject = result;
     resv_ProductImg.initTitle(productObject.id);
     resv_ProductTitleDetail.drawDescription(productObject);
@@ -85,7 +98,7 @@ var resv_ProductImg = (function() {
   //함수
   var requestImageList = function(productId) {
     $.ajax({
-      url:'/product/detail/images/'+productId,
+      url:'/api/products/'+ productId + '/images',
       dataType:'json',
       type:'get',
       success:drawImage

@@ -1,6 +1,10 @@
 package kr.or.seongjin.reservation.controller;
 
 import java.util.Collection;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,15 +20,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.seongjin.reservation.domain.Category;
+import kr.or.seongjin.reservation.domain.Product;
 import kr.or.seongjin.reservation.service.CategoryService;
+import kr.or.seongjin.reservation.service.ProductService;
 
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryRestController {
-
 	
-	 @Autowired
-	 CategoryService categoryService;
+	
+	private CategoryService categoryService;
+	private ProductService productService;
+
+	@Autowired
+	void setProductService(ProductService productService) {
+		this.productService = productService;
+	}
+	
+	@Autowired
+	void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
+	 
 	
 	 @GetMapping
 	 Collection<Category> task1(Model model){
@@ -46,4 +63,10 @@ public class CategoryRestController {
 	 boolean task1Delete(@PathVariable Integer id){
 	        return categoryService.delete(id);
 	 }
+	
+	@GetMapping("/{categoryId}/products")
+	public List<Product> task1(@PathVariable Integer categoryId,HttpServletRequest request,HttpServletResponse  response) {
+		response.addIntHeader("totalCount", productService.countByCategory(categoryId));
+		return productService.selectAllByCategoryForMainPage(categoryId,Integer.parseInt(request.getHeader("offset")));
+	}	 
 }

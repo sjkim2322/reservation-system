@@ -10,7 +10,7 @@ function ProductDetail(productId) {
 
   var requestDetailProduct = function() {
     $.ajax({
-      url:'/product/detail"/prices/'+productId,
+      url:'/api/products/' +productId + 'prices',
       dataType:'json',
       type:'get',
       success:getResult

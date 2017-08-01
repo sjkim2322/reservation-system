@@ -26,7 +26,7 @@
 			<div class="ct_wrap">
 				<div class="top_title review_header">
 					<a href="#" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
-					<h2><span class="title">클림트 인사이드</span></h2>
+					<h2><span class="title"></span></h2>
 				</div>
 				<!-- 리뷰 별점 -->
 				<div class="write_act">
@@ -120,7 +120,7 @@
 <script id="product-reviewImage-template" type="text/x-handlebars-template">
 		{{#each this}}
 		<li class="item" data-id={{this}}>
-			<a href="#" class="anchor">
+			<a class="anchor">
 				<span class="spr_book ico_del">삭제</span>
 			</a>
 				<img src="/files/{{this}}" width="130" alt="" class="item_thumb">
@@ -130,8 +130,10 @@
 </script>
 <script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
 <script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
+<script src="/resources/js/node_modules/@egjs/component/dist/component.js"></script>
 <script src="/resources/js/init.js"></script>
 <script src="/resources/js/handlebarsModule.js"></script>
+<script src="/resources/js/Rating.js"></script>
 <script src="/resources/js/reviewWrite.js"></script>
 
 </html>

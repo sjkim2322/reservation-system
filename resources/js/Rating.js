@@ -51,14 +51,28 @@ Rating.prototype.mouseleave = function(instance) {
 
 Rating.prototype.click = function(event,instance) {
   event.preventDefault();
+  instance.mouseenter.call(this,instance);
   if($(this).hasClass(instance.activeClassName)) {
-    if(this.value == instance.clickedTarget.score) { //mouseenter 이벤트가없는 모바일에만해당
-      instance.clickedTarget.score = this.value -1;
-    } else {
       instance.clickedTarget.score = this.value;
-    }
-  } else {
+  } else  {//mouseenter 이벤트가없는 모바일에만해당
     instance.clickedTarget.score = this.value -1;
   }
   instance.trigger("change",instance.clickedTarget);
 }
+// Rating.prototype.click = function(event,instance) {
+//   event.preventDefault();
+//   if($(this).hasClass(instance.activeClassName)) {
+//     if(this.value == instance.clickedTarget.score) { //mouseenter 이벤트가없는 모바일에만해당 (web에서는 클래스가 있는데 클릭score와 value가 같을 수없음)
+//       $(this).removeClass(instance.activeClassName);
+//       instance.clickedTarget.score = this.value -1;
+//     } else {
+//       instance.clickedTarget.score = this.value;
+//     }
+//   } else if(this.value - 1 == instance.clickedTarget.score) {//mouseenter 이벤트가없는 모바일에만해당
+//     $(this).addClass(instance.activeClassName);
+//     instance.clickedTarget.score = this.value;
+//   } else {
+//     instance.clickedTarget.score = this.value -1;
+//   }
+//   instance.trigger("change",instance.clickedTarget);
+// }

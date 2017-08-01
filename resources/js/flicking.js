@@ -1,7 +1,7 @@
 //현재 page에서는 상단타이틀이 핸들바를통해 그려진 이후 init!
 //targetelemnet가 그때 그려짐
 //flicking ul태그 받고 밑에 li 태그 Flicking
-function FlickingModule() {
+function Flicking() {
   var testval=0;
   //플리킹 메인 엘리먼트 이 엘리먼트의 right값으로 animate
   var flickingTarget;

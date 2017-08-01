@@ -366,7 +366,7 @@
 <script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
 <script src="/resources/js/node_modules/@egjs/component/dist/component.js"></script>
 <script src="/resources/js/handlebarsModule.js"></script>
-<script src="/resources/js/flicking.js"></script>
+<script src="/resources/js/Flicking.js"></script>
  <script src="/resources/js/detail.js"></script>
 
 

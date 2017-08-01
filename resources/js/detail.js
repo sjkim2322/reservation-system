@@ -74,7 +74,7 @@ var resv_ProductImg = (function() {
 
 
   //변수
-  var flicking = new FlickingModule();
+  var flicking = new Flicking();
   var numberingTarget;
   var leftBtn;
   var rightBtn;
@@ -180,7 +180,7 @@ Popup.prototype.showPopup = function(){
 //한줄평 모듈
 var resv_reviews = (function() {
 
-  var flicking = new FlickingModule();
+  var flicking = new Flicking();
   var popup = new Popup();
 
   //함수

@@ -28,7 +28,7 @@ public class CommentController {
 		}
 	
 	@PostMapping
-	public void insertComment(@RequestParam(value="fileList[]") List<Integer> fileList,
+	public void insertComment(@RequestParam(value="fileList[]",required= false) List<Integer> fileList,
 							@ModelAttribute UserComment userComment,
 							HttpSession session) {
 		ReservationUser user = (ReservationUser) session.getAttribute("user");

@@ -42,7 +42,6 @@ public class ProductRestController {
 	
 	@GetMapping(path="/{productId}/productName",produces = "application/text; charset=utf8" )
 	public String getProductName(@PathVariable Integer productId,HttpServletResponse  response) throws Exception {
-		response.setContentType("text/html;charset=UTF-8");
 		return productService.getProductName(productId);
 	}
 	

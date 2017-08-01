@@ -5,7 +5,7 @@ public class UserSqls {
 	public final static String SELECT_USER_BY_SNS_ID = 
 			"SELECT  "
 			+ "id, "
-			+ "username name,"
+			+ "username username,"
 			+ "email,"
 			+ "nickname,"
 			+ "sns_id,"

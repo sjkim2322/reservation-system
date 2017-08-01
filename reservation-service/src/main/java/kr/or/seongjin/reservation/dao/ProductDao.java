@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import kr.or.seongjin.reservation.Exception.ReservationException;
 import kr.or.seongjin.reservation.dao.sql.ProductSqls;
 import kr.or.seongjin.reservation.domain.Product;
 import kr.or.seongjin.reservation.domain.ProductPrice;
@@ -61,7 +62,7 @@ public class ProductDao {
     	return jdbc.queryForObject(ProductSqls.SELECT_PLACE_NAME_BY_PRODUCT_ID,params,String.class); 
     }
     
-    public Product selectByProductId(Integer productId) throws Exception{
+    public Product selectByProductId(Integer productId) throws ReservationException {
     	Map<String, ?> params = Collections.singletonMap("id", productId);
     	 return jdbc.queryForObject(ProductSqls.SELECT_BY_PRODUCT_ID, params, rowMapper);
     }

@@ -22,28 +22,27 @@ import kr.or.seongjin.reservation.service.CategoryService;
 @RequestMapping("/api/categories")
 public class CategoryRestController {
 
-	
-	 @Autowired
-	 CategoryService categoryService;
-	
-	 @GetMapping
-	 Collection<Category> task1(Model model){
-	        return categoryService.selectAll();
-	 }
-	    
-	 @PostMapping
-     @ResponseStatus(HttpStatus.CREATED)
-	 Category task1Insert(@RequestBody Category category){
-	        return categoryService.insert(category);
-	    }
-	    
-	 @PutMapping
-	 boolean task1Update(@RequestBody Category category){
-	        return categoryService.update(category);
-	 }
-	    
-	 @DeleteMapping("/{id}")
-	 boolean task1Delete(@PathVariable Integer id){
-	        return categoryService.delete(id);
-	 }
+	@Autowired
+	CategoryService categoryService;
+
+	@GetMapping
+	Collection<Category> task1(Model model) {
+		return categoryService.selectAll();
+	}
+
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	Category task1Insert(@RequestBody Category category) {
+		return categoryService.insert(category);
+	}
+
+	@PutMapping
+	boolean task1Update(@RequestBody Category category) {
+		return categoryService.update(category);
+	}
+
+	@DeleteMapping("/{id}")
+	boolean task1Delete(@PathVariable Integer id) {
+		return categoryService.delete(id);
+	}
 }

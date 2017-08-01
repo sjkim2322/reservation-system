@@ -63,7 +63,7 @@ public class ReservationController {
 	}
 	
 	@PostMapping
-	public void serReservation(HttpSession session, @RequestBody Reservation reservation) throws Exception {
+	public void setReservation(HttpSession session, @RequestBody Reservation reservation) throws Exception {
 		ReservationUser user = (ReservationUser)session.getAttribute("user");
 		reservation.setUserId(user.getId());
 		reservationService.setReservation(reservation);

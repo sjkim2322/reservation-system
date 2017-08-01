@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.seongjin.reservation.Exception.NotExistProductException;
+import kr.or.seongjin.reservation.Exception.ReservationException;
 import kr.or.seongjin.reservation.dao.ReservationDao;
 import kr.or.seongjin.reservation.domain.ProductPrice;
 import kr.or.seongjin.reservation.domain.Reservation;
@@ -29,11 +31,10 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public List<ReservationCount> getReservationCountByUser(int userId) throws Exception {
+	public List<ReservationCount> getReservationCountByUser(int userId) throws NotExistProductException {
 		List<ReservationCount> list = reservationDao.selectReservationCountByUser(userId);
 		if(list == null){
-			//다른 exception
-			throw new Exception();
+			throw new NotExistProductException();
 		}
 		return list;
 	}

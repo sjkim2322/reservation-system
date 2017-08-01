@@ -20,17 +20,17 @@ public class ReservationSqls {
 			+ "d.display_start, "
 			+ "d.display_end "	//display_info
 			+ "FROM reservation_info as r, product as p, display_info as d "
-			+ "WHERE d.product_id = r.product_id and p.id = r.product_id and r.user_id= :id "
+			+ "WHERE d.product_id = r.product_id and p.id = r.product_id AND r.user_id= :id "
 			+ "ORDER by reservation_type";
 	
 	public final static String SELECT_MY_RESERVATION_PRICE_BY_TYPE =
-			"SELECT product_id, price_type, price "
-			+ "FROM product_price "
-			+ "WHERE product_id IN "
-							+ "(SELECT product_id "
-							+ "FROM reservation_info "
-							+ "WHERE user_id= :id) "
-			+ "ORDER BY product_id, price_type";
+			"SELECT pp.product_id, "
+			+ "pp.price_type, "
+			+ "pp.price "
+			+ "FROM product_price AS pp, reservation_info AS ri "
+			+ "WHERE pp.product_id = ri.product_id AND ri.user_id = 12 "
+			+ "ORDER BY pp.product_id, pp.price_type";
+	
 	
 	//0 :이용 신청 1 :이용 확정 2 :이용완료 3 :취소
 	public final static String UPDATE_RESERVATION_TYPE_BY_ID =

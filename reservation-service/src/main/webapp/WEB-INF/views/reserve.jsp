@@ -93,6 +93,8 @@
                         {{/each}}
                     </div>
                 </div>
+			</script>
+			<script id="booker-info-template" type="text/forHandlebars">
                 <div class="section_booking_form">
                     <div class="booking_form_wrap">
                         <div class="form_wrap">
@@ -116,7 +118,8 @@
                             </form>
                         </div>
                     </div>
-                    </script>
+			</script>
+                    
                     <div class="section_booking_agreement">
                         <div class="agreement all"> <input type="checkbox" id="chk3" class="chk_agree"> <label for="chk3" class="label chk_txt_label"> <span>이용자 약관 전체동의</span> </label>
                             <div class="agreement_nessasary">
@@ -166,15 +169,16 @@
 <script>
 
 $(".bk_btn_wrap").on("click", function(){
-    var data = new Object();
-    data.productId = $(location).attr('href').split('/')[4];
-    data.generalTicketCount = $("input.count_control_input:eq(0)").val();
-    data.youthTicketCount = $("input.count_control_input:eq(1)").val();
-    data.childTicketCount = $("input.count_control_input:eq(2)").val();
-    data.reservationName = $("input.text").val();
-    data.reservationTel = $("input.tel").val();
-    data.reservationEmail = $("input.email").val();
-
+    var data = {
+	    productId : $(location).attr('href').split('/')[4],
+	    generalTicketCount : $("input.count_control_input:eq(0)").val(),
+	    youthTicketCount : $("input.count_control_input:eq(1)").val(),
+	    childTicketCount : $("input.count_control_input:eq(2)").val(),
+	    reservationName : $("input.text").val(),
+	    reservationTel : $("input.tel").val(),
+	    reservationEmail : $("input.email").val()
+    };
+    
     $.ajax({
       type:'post',
       url:'/api/reservations',

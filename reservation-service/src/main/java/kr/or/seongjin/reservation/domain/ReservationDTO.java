@@ -1,6 +1,5 @@
 package kr.or.seongjin.reservation.domain;
 
-
 import java.sql.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;

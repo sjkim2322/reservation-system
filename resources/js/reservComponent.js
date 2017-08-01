@@ -1,6 +1,4 @@
 
-var myObserver = new eg.Component();
-
 function Ticket(target) {
 
   var price = target.find('em.product_dsc > span').text();
@@ -22,10 +20,13 @@ function Ticket(target) {
       }
     }
   }.bind(this));
+
+
   plusBtn.on('click',function(){
     countPosition.val(++count);
     totalPrice.text(countPosition.val()*price);
     this.plus();
+
     if(count===1) {
       totalPrice.closest('.individual_price').addClass('on_color');
       toggling();
@@ -38,7 +39,7 @@ function Ticket(target) {
     }
 }
 
-Ticket.prototype = myObserver;
+Ticket.prototype = new eg.Component();
 Ticket.prototype.constructor=Ticket;
 Ticket.prototype.plus = function() {
   this.trigger("plus");
@@ -48,53 +49,13 @@ Ticket.prototype.minus = function() {
 };
 
 
-function UserInfo() {
-    var phoneNum;
-    var email;
 
-    var phoneNumPattern=/^\d{2,3}-\d{3,4}-\d{4}$/;
-    var emailPattern=/\w+@+\w+\.+[A-Za-z]{2,3}$/;
-    var userAgreement;
-
-     var validCheck = function(position,pattern) {
-      var checkPoint = position.closest('.inline_form').find('label > span');
-      position.keyup(function(){
-        if(pattern.test(position.val())) {
-          checkPoint.addClass('valid');
-          checkPoint.removeClass('invalid');
-          this.valid({"id":position.attr('id')});
-        }else {
-          checkPoint.removeClass('valid');
-          checkPoint.addClass('invalid');
-          this.invalid({"id":position.attr('id')});
-        }
-      }.bind(this));
-      position.trigger('keyup');
-    }.bind(this);
-
-    phoneNum = $('div.inline_control > input.tel')
-    email = $('div.inline_control > input.email')
-    userAgreement = $('div.agreement > input#chk3');
-    $('a.btn_agreement > span.btn_text').on('click',function(){
-      $(this).closest('.agreement').toggleClass('open');
-    });
-    validCheck(email,emailPattern);
-    validCheck(phoneNum,phoneNumPattern);
-    userAgreement.on('click',function(){
-      if(userAgreement.prop('checked')) {
-        this.valid({"id":userAgreement.attr('id')});
-      }
-      else {
-        this.invalid({"id":userAgreement.attr('id')});
-      }
-    }.bind(this));
-};
-UserInfo.prototype = myObserver;
-UserInfo.prototype.constructor=UserInfo;
-UserInfo.prototype.valid = function(data) {
-  console.log(data.id);
-  this.trigger("valid",data);
-};
-UserInfo.prototype.invalid = function(data) {
-  this.trigger("invalid",data);
-}
+// UserInfo.prototype = myObserver;
+// UserInfo.prototype.constructor=UserInfo;
+// UserInfo.prototype.valid = function(data) {
+//   console.log(data.id);
+//   this.trigger("valid",data);
+// };
+// UserInfo.prototype.invalid = function(data) {
+//   this.trigger("invalid",data);
+// }

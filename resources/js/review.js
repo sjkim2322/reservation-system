@@ -64,6 +64,10 @@ var resv_reviews = (function() {
         popupEvent();
         popup.on("clickPopup",function(){
             flicking.init($('ul.popup_img'));
+            $("#close").on("click",function(){
+                $("#photoviewer").remove();
+            })
+
         })
     };
 
@@ -130,7 +134,7 @@ var resv_reviews = (function() {
     return{
         init: function(){
             requestReviews();
-            $(document).scroll(loadReviewByScroll); //
+            $(document).scroll(loadReviewByScroll);
         }
     }
 

@@ -6,23 +6,21 @@ public class UserCommentSqls {
 			"SELECT * "
 	     +  "FROM reservation_user_comment "
 	     +  "WHERE id = :id";
-//	public final static String LIST_BY_PRODUCT_ID = 
-//			"SELECT * "
-//			+ "FROM users C  join (product A right outer join reservation_user_comment B on A.id = B.product_id ) on B.user_id = C.id  "
-//			+ "WHERE product_id = :productId "
-//			+ "Order by B.create_date desc ";
+	
 	public final static String LIST3_BY_PRODUCT_ID = 
 			"SELECT * "
-			+ "FROM users C  join (product A right outer join reservation_user_comment B on A.id = B.product_id ) on B.user_id = C.id "
+			+ "FROM users C join (product A right outer join reservation_user_comment B on A.id = B.product_id ) on B.user_id = C.id "
 			+ "WHERE A.id = :productId "
 			+ "Order by B.create_date desc "
 			+ "LIMIT 3 ";
+	
 	public final static String LIST_BY_PRODUCT_ID = 
 			"SELECT * "
-			+ "FROM users C  join (product A right outer join reservation_user_comment B on A.id = B.product_id ) on B.user_id = C.id "
+			+ "FROM users C join (product A right outer join reservation_user_comment B on A.id = B.product_id ) on B.user_id = C.id "
 			+ "WHERE A.id = :productId "
 			+ "Order by C.id "
 			+ "LIMIT :offset,:limit ";
+	
 	
 	public final static String LIST_IMAGE_BY_COMMENT_ID = 
 			"SELECT file_id "

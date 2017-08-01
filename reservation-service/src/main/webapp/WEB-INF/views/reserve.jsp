@@ -166,15 +166,16 @@
 <script>
 
 $(".bk_btn_wrap").on("click", function(){
-    var data = new Object();
-    data.productId = $(location).attr('href').split('/')[4];
-    data.generalTicketCount = $("input.count_control_input:eq(0)").val();
-    data.youthTicketCount = $("input.count_control_input:eq(1)").val();
-    data.childTicketCount = $("input.count_control_input:eq(2)").val();
-    data.reservationName = $("input.text").val();
-    data.reservationTel = $("input.tel").val();
-    data.reservationEmail = $("input.email").val();
-
+    var data = {
+	    productId : $(location).attr('href').split('/')[4],
+	    generalTicketCount : $("input.count_control_input:eq(0)").val(),
+	    youthTicketCount : $("input.count_control_input:eq(1)").val(),
+	    childTicketCount : $("input.count_control_input:eq(2)").val(),
+	    reservationName : $("input.text").val(),
+	    reservationTel : $("input.tel").val(),
+	    reservationEmail : $("input.email").val()
+    };
+    
     $.ajax({
       type:'post',
       url:'/api/reservations',

@@ -69,6 +69,4 @@ public class CategoryRestController {
 		response.addIntHeader("totalCount", productService.countByCategory(categoryId));
 		return productService.selectAllByCategoryForMainPage(categoryId,Integer.parseInt(request.getHeader("offset")));
 	}	 
-	 
-	 
 }

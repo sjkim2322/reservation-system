@@ -1,10 +1,5 @@
-
-
 var Reserve = (function(){
-
-
     var tickets = [];
-
     function handlingProduct(product) {
 
         HandlebarsModule.customHelper("priceHelper",function(index) {
@@ -26,16 +21,15 @@ var Reserve = (function(){
         HandlebarsModule.create($('#product-reservDetail-template'),product);
 
         $.each($('div.qty'),function(i,result){
-            tickets.push(new Ticket($(result)));
+            tickets.push(new Ticket($(result),i));
+            tickets[i].on("plus"+i,function(){
+                BookerInfo.updateTotalCount(1);
+            });
+            tickets[i].on("minus"+i,function(){
+                BookerInfo.updateTotalCount(0);
+            });
+        });
 
-        });
-        tickets[0].on("plus",function(){
-            console.log("!@#");
-            BookerInfo.updateTotalCount(1);
-        });
-        tickets[0].on("minus",function(){
-            BookerInfo.updateTotalCount(0);
-        });
 
     }
 
@@ -200,4 +194,3 @@ Storage.init().done(
 $(document).ready(function(){
 
 });
-

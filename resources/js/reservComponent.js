@@ -1,6 +1,5 @@
 
-function Ticket(target) {
-
+function Ticket(target,index) {
   var price = target.find('em.product_dsc > span').text();
   var minusBtn = target.find('div.clearfix > .ico_minus3');
   var plusBtn = target.find('div.clearfix > .ico_plus3');
@@ -13,7 +12,7 @@ function Ticket(target) {
     if(count!=0) {
       countPosition.val(--count);
       totalPrice.text(countPosition.val()*price);
-      this.minus();
+      this.minus(index);
       if(count===0) {
         totalPrice.closest('.individual_price').removeClass('on_color');
         toggling();
@@ -25,7 +24,7 @@ function Ticket(target) {
   plusBtn.on('click',function(){
     countPosition.val(++count);
     totalPrice.text(countPosition.val()*price);
-    this.plus();
+    this.plus(index);
 
     if(count===1) {
       totalPrice.closest('.individual_price').addClass('on_color');
@@ -41,11 +40,11 @@ function Ticket(target) {
 
 Ticket.prototype = new eg.Component();
 Ticket.prototype.constructor=Ticket;
-Ticket.prototype.plus = function() {
-  this.trigger("plus");
+Ticket.prototype.plus = function(index) {
+  this.trigger("plus"+index);
 };
-Ticket.prototype.minus = function() {
-  this.trigger("minus");
+Ticket.prototype.minus = function(index) {
+  this.trigger("minus"+index);
 };
 
 

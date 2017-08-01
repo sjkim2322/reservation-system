@@ -20,6 +20,19 @@
     z-index: 10000;
 }
 
+#close{
+	position: relative;
+	width:30px;
+	height:30px;
+	float:right;
+	background-image: url('/resources/img/Close.png');
+	background-color:#23252b;
+	background-size: 30px 30px;
+	z-index: 10001;
+
+
+}
+
 .popup_img {
     position: relative;
     min-height: 210px;
@@ -54,7 +67,7 @@
             <div class="wrap_review_list">
                 <div class="review_header">
                     <div class="top_title gr">
-                        <a href="#" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
+                        <a href="javascript:history.back()" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
                         <h2><a class="title" href="#">오디컴퍼니 주식회사</a></h2>
                     </div>
                 </div>
@@ -133,7 +146,9 @@
 	    </footer>
 	    	<script id="product-photoviews-template" type="text/forHandlebars">
 				<div id="photoviewer">
+					
 					<div id="header" class="header_tit"></div>
+						<a id = "close"></a>
 						<ul class="popup_img">
 							{{#each this}}
 							<li class="item">

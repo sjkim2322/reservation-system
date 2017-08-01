@@ -93,6 +93,8 @@
                         {{/each}}
                     </div>
                 </div>
+			</script>
+			<script id="booker-info-template" type="text/forHandlebars">
                 <div class="section_booking_form">
                     <div class="booking_form_wrap">
                         <div class="form_wrap">
@@ -116,7 +118,8 @@
                             </form>
                         </div>
                     </div>
-                    </script>
+			</script>
+                    
                     <div class="section_booking_agreement">
                         <div class="agreement all"> <input type="checkbox" id="chk3" class="chk_agree"> <label for="chk3" class="label chk_txt_label"> <span>이용자 약관 전체동의</span> </label>
                             <div class="agreement_nessasary">

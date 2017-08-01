@@ -76,8 +76,8 @@ public class ProductDao {
 		return jdbc.queryForList(ProductSqls.SELECT_IMAGES_BY_PRODUCT_ID, params, String.class);
 	}
 
-	public List<ProductPrice> selectPricesByProductId(List<Integer> products) {
-		Map<String, ?> params = Collections.singletonMap("productId", products);
+	public List<ProductPrice> selectPricesByProductId(int productId) {
+		Map<String, ?> params = Collections.singletonMap("productId", productId);
 		return jdbc.query(ProductSqls.SELECT_PRICES_BY_PRODUCT_ID, params, BeanPropertyRowMapper.newInstance(ProductPrice.class));
 	}
 

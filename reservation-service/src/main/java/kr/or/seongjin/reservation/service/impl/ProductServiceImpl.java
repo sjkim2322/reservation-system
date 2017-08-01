@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductPrice> getPricesByProductId(Integer products) {
+	public List<ProductPrice> getPricesByProductId(Integer productId) {
 		return productDao.selectPricesByProductId(productId);
 	}
 			

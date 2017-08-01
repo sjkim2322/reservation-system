@@ -4,60 +4,60 @@ function Rating(root,targetClassName,activeClassName) {
   this.mouseEnteredTarget = {score : 0};
   this.clickedTarget = {score : 0};
   this.init();
+  this.mobileCheck = true;
 }
-
+//this=instance
+//call은 인자가 1개씩, apply는 배열
 Rating.prototype = new eg.Component();
 Rating.prototype.constructor = Rating;
 Rating.prototype.init = function() {
-  var instance = this;
-  instance.targetList.on("mouseenter",function() {
-      instance.mouseenter.call(this,instance);
-      //call은 인자가 1개씩, apply는 배열
-    });
-  instance.targetList.on("mouseleave",function() {
-      instance.mouseleave(instance);
-  });
-  instance.targetList.on("click",function(event) {
-    instance.click.call(this,event,instance);
-  });
+  // this.targetList.on("mouseenter",this.mouseenter.bind(undefined,event.target));
+  this.targetList.on("mouseenter",function(event) {
+      this.mouseenter(event.target);
+    }.bind(this));
+  this.targetList.on("mouseout",function(event) {
+      this.mouseleave();
+  }.bind(this));
+  this.targetList.on("click",function(event) {
+    this.click(event.target);
+  }.bind(this));
 
 };
-
-Rating.prototype.mouseenter = function(instance) {
-  instance.mouseEnteredTarget.score = this.value;
-    instance.targetList.each(function(){
-      if(instance.mouseEnteredTarget.score < this.value) {
-        $(this).removeClass(instance.activeClassName);
-      } else if(this.value == instance.mouseEnteredTarget.score && this.value == instance.clickedTarget.score) {
-        $(this).removeClass(instance.activeClassName);
-        --instance.mouseEnteredTarget.score;
+Rating.prototype.mouseenter = function(target) {
+  console.log(target);
+  this.mouseEnteredTarget.score = target.value;
+    this.targetList.each(function(index,target){
+      if(this.mouseEnteredTarget.score < target.value) {
+        $(target).removeClass(this.activeClassName);
+      } else if(target.value == this.mouseEnteredTarget.score && target.value == this.clickedTarget.score) {
+        $(target).removeClass(this.activeClassName);
+        --this.mouseEnteredTarget.score;
       } else {
-        $(this).addClass(instance.activeClassName);
+        $(target).addClass(this.activeClassName);
       }
-    });
-    instance.trigger("change",instance.mouseEnteredTarget);
+    }.bind(this));
+    this.trigger("change",this.mouseEnteredTarget);
 }
 
-Rating.prototype.mouseleave = function(instance) {
-  instance.targetList.each(function(){
-    if(instance.clickedTarget.score >= this.value) {
-      $(this).addClass(instance.activeClassName);
+Rating.prototype.mouseleave = function() {
+  this.targetList.each(function(index,target){
+    if(this.clickedTarget.score >= target.value) {
+      $(target).addClass(this.activeClassName);
     } else {
-      $(this).removeClass(instance.activeClassName);
+      $(target).removeClass(this.activeClassName);
     }
-  });
-  instance.trigger("change",instance.clickedTarget);
+  }.bind(this));
+  this.trigger("change",this.clickedTarget);
 }
 
-Rating.prototype.click = function(event,instance) {
+Rating.prototype.click = function(target) {
   event.preventDefault();
-  instance.mouseenter.call(this,instance);
-  if($(this).hasClass(instance.activeClassName)) {
-      instance.clickedTarget.score = this.value;
+  if($(target).hasClass(this.activeClassName)) {
+      this.clickedTarget.score = target.value;
   } else  {//mouseenter 이벤트가없는 모바일에만해당
-    instance.clickedTarget.score = this.value -1;
+    this.clickedTarget.score = target.value -1;
   }
-  instance.trigger("change",instance.clickedTarget);
+  this.trigger("change",this.clickedTarget);
 }
 // Rating.prototype.click = function(event,instance) {
 //   event.preventDefault();

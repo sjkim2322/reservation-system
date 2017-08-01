@@ -1,11 +1,12 @@
 
-function Ticket(target,index) {
+function Ticket(target) {
   var price = target.find('em.product_dsc > span').text();
   var minusBtn = target.find('div.clearfix > .ico_minus3');
   var plusBtn = target.find('div.clearfix > .ico_plus3');
   var countPosition = target.find('div.clearfix > .count_control_input');
   var totalPrice = target.find('div.individual_price > .total_price');
   var count = 0;
+  this.emitter = new eg.Component();
 
 
   minusBtn.on('click',function(){
@@ -38,14 +39,16 @@ function Ticket(target,index) {
     }
 }
 
-Ticket.prototype = new eg.Component();
 Ticket.prototype.constructor=Ticket;
-Ticket.prototype.plus = function(index) {
-  this.trigger("plus"+index);
+Ticket.prototype.plus = function() {
+  this.emitter.trigger("plus");
 };
-Ticket.prototype.minus = function(index) {
-  this.trigger("minus"+index);
+Ticket.prototype.minus = function() {
+  this.emitter.trigger("minus");
 };
+Ticket.prototype.on = function(eventName, callback) {
+  this.emitter.on(eventName,callback);
+}
 
 
 

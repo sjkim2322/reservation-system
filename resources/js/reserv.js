@@ -21,16 +21,14 @@ var Reserve = (function(){
         HandlebarsModule.create($('#product-reservDetail-template'),product);
 
         $.each($('div.qty'),function(i,result){
-            tickets.push(new Ticket($(result),i));
-            tickets[i].on("plus"+i,function(){
+            tickets.push(new Ticket($(result)));
+            tickets[i].on("plus",function(){
                 BookerInfo.updateTotalCount(1);
             });
-            tickets[i].on("minus"+i,function(){
+            tickets[i].on("minus",function(){
                 BookerInfo.updateTotalCount(0);
             });
         });
-
-
     }
 
 
@@ -185,6 +183,7 @@ var Storage = (function(){
 
 Storage.init().done(
     function(priceResult,imageResult,productResult,userResult){
+      console.log(priceResult);
         Storage.setStorage(priceResult[0],imageResult[0],productResult[0],userResult[0]);
         Reserve.init(Storage.getProductReserve());
         BookerInfo.init(Storage.getBookerInfo());

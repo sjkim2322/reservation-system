@@ -39,8 +39,7 @@ public class ReservationRestController {
 	}
 
 	@GetMapping
-	public List<ReservationDTO> getReservationByUserId(HttpSession session) {
-		ReservationUser user = (ReservationUser)session.getAttribute("user");
+	public List<ReservationDTO> getReservationByUserId(ReservationUser user) {
 		try {
 			return reservationService.getReservationByUser(user.getId());
 		} catch (Exception e) {
@@ -51,8 +50,7 @@ public class ReservationRestController {
 	}
 	
 	@GetMapping("/count")
-	public List<ReservationCount> getReservationCountByUserId(HttpSession session) {	
-		ReservationUser user = (ReservationUser)session.getAttribute("user");
+	public List<ReservationCount> getReservationCountByUserId(ReservationUser user) {	
 		try {
 			return reservationService.getReservationCountByUser(user.getId());
 		} catch (Exception e) {
@@ -63,8 +61,7 @@ public class ReservationRestController {
 	}
 	
 	@PostMapping
-	public void serReservation(HttpSession session, @RequestBody Reservation reservation) throws Exception {
-		ReservationUser user = (ReservationUser)session.getAttribute("user");
+	public void serReservation(ReservationUser user, @RequestBody Reservation reservation) throws Exception {
 		reservation.setUserId(user.getId());
 		reservationService.setReservation(reservation);
 	}

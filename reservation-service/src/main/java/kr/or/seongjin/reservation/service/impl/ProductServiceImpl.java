@@ -42,7 +42,6 @@ public class ProductServiceImpl implements ProductService {
 	public Product getDetailProduct(Integer productId) throws NotExistProductException {
 		Product product = productDao.selectByProductId(productId);
 		if(product == null){
-			System.out.println("@@");
 			throw new NotExistProductException();
 		} else {
 			return product;

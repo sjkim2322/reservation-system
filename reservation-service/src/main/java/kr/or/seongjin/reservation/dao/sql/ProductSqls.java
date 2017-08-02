@@ -38,4 +38,9 @@ public class ProductSqls {
 			"SELECT * "
 			+ "FROM product_price "
 			+ "WHERE product_id = :productId ";
+	public static final String SELECT_PLACE_NAME_BY_PRODUCT_ID_LIST = 
+			"SELECT product_id, place_name "
+			+ "FROM display_info "
+			+ "WHERE product_id in (:productIdList)";
+			
 }

@@ -86,4 +86,9 @@ public class ProductDao {
 		return jdbc.queryForObject(ProductSqls.SELECT_PRODUCT_NAME_BY_PRODUCT_ID, params, String.class);
 	}
 
+	public List<Map<String, Object>> selectPlaceNameByProductIdList(List<Integer> productIdList) {
+		Map<String, ?> params = Collections.singletonMap("productIdList", productIdList);
+		return jdbc.queryForList(ProductSqls.SELECT_PLACE_NAME_BY_PRODUCT_ID_LIST, params);
+	}
+
 }

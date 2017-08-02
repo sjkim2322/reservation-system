@@ -17,7 +17,6 @@ var resv_ProductDetail = (function () {
           type:'get',
           success:titleInit,
           error:function(result){
-            console.log(result.responseText);
              location.href = result.responseText;
             // $(location).attr("href", result);
           }
@@ -37,7 +36,6 @@ var resv_ProductDetail = (function () {
     });
   };
   var reviewInit = function(result,status,xhr) {
-    console.log(result);
     reviewObject = result;
     HandlebarsModule.customHelper("resHeader",function(name) {
       if(name === 'rate') {
@@ -61,7 +59,7 @@ var resv_ProductDetail = (function () {
     resv_ProductTitleDetail.drawEvent(productObject.event);
     $('div.section_btn').on('click','button.bk_btn',function() {
       location.href="/reservation/"+productId;
-    })
+    });
   };
   var createLayer = function() {
     $('.visual_txt_tit span').text(productObject.name);
@@ -264,17 +262,24 @@ var ResvBottomDetail = (function(){
 
 var LocationInfomation =(function(){
   var searchAddressToCoordinate = function(address) {
-    naver.maps.Service.geocode({
-      address: address
-    }, function(status, response) {
-        var item = response.result.items[0],
-        addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
-        point = new naver.maps.Point(item.point.x, item.point.y);
-        new naver.maps.Map("map", {
-          center: new naver.maps.LatLng(point),
-          zoom: 10
-        });
-    });
+    if(address!=null) {
+      naver.maps.Service.geocode({
+        address: address
+      }, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+              console.log(address + '의 검색 결과가 없거나 기타 네트워크 에러');
+              return ;
+          } else {
+            var item = response.result.items[0],
+            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+            point = new naver.maps.Point(item.point.x, item.point.y);
+            new naver.maps.Map("map", {
+              center: new naver.maps.LatLng(point),
+              zoom: 10
+            });
+          }
+      });
+    }
   }
   return {
     searchAddressToCoordinate : searchAddressToCoordinate

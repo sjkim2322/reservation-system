@@ -1,4 +1,6 @@
-//현재 page에서는 상단타이틀이 핸들바를통해 그려진 이후 init!
+
+
+define([],function(){
 //targetelemnet가 그때 그려짐
 //flicking ul태그 받고 밑에 li 태그 Flicking
 function Flicking() {
@@ -91,5 +93,6 @@ function Flicking() {
     currentRight = currentIndex * flickingSize;
     addFlickingEvent();
   };
-
 };
+  return Flicking;
+});

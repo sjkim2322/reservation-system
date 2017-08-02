@@ -164,7 +164,7 @@ require(['jquery', 'HandlebarsModule','Init','Ticket'],
                 $(".bk_btn_wrap").on("click", function() {
                     if (checkReserveBtn()) {
                         var data = {
-                            productId: $(location).attr('href').split('/')[4],
+                            productId: $(location).attr('pathname').split("/")[2],
                             generalTicketCount: $("input.count_control_input:eq(0)").val(),
                             youthTicketCount: $("input.count_control_input:eq(1)").val(),
                             childTicketCount: $("input.count_control_input:eq(2)").val(),
@@ -198,7 +198,7 @@ require(['jquery', 'HandlebarsModule','Init','Ticket'],
         })();
 
         var Storage = (function(){
-            var productId = $(location).attr('href').split('/')[4];
+            var productId = $(location).attr('pathname').split("/")[2];
             var productPrice;
             var productImage;
             var product;
@@ -243,7 +243,3 @@ require(['jquery', 'HandlebarsModule','Init','Ticket'],
 
             });
     });
-
-
-
-

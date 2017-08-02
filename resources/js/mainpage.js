@@ -4,7 +4,7 @@ require.config({
 
     paths: {
         jquery: 'node_modules/jquery/dist/jquery',
-		handlebars:'node_modules/handlebars/dist/handlebars'
+				handlebars:'node_modules/handlebars/dist/handlebars'
 
     }
 });
@@ -268,14 +268,3 @@ require(['jquery', 'handlebars'],
         resv_product.requestProduct(0);
 
     });
-
-
-
-
-
-
-
-
-
-
-

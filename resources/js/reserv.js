@@ -28,7 +28,11 @@ var Reserve = (function(){
             tickets[i].on("minus",function(){
                 BookerInfo.updateTotalCount(0);
             });
+
+
         });
+
+
     }
 
 
@@ -58,9 +62,11 @@ var BookerInfo = (function(){
     var checkReserveBtn = function() {
         if (totalCount != 0 && phoneValid && emailValid && agreementValid) {
             $('div.bk_btn_wrap').removeClass('disable');
+            return true;
         }
         else {
             $('div.bk_btn_wrap').addClass('disable');
+            return false;
         }
     };
 
@@ -92,40 +98,44 @@ var BookerInfo = (function(){
         validCheck(email,emailPattern);
         validCheck(phoneNum,phoneNumPattern);
 
+        email.trigger("keyup");
+
+    }
+
+    function checkValue(position,pattern,checkPoint){
+        if(pattern.test(position.val())) {
+            checkPoint.addClass('valid');
+            checkPoint.removeClass('invalid');
+            if(position.attr('id') === "email") {
+                emailValid = true;
+            }
+            else if(position.attr('id') === "tel") {
+                phoneValid = true;
+            }
+            else if(position.attr('id') === "chk3") {
+                agreementValid = true;
+            }
+            checkReserveBtn();
+
+        }else {
+            checkPoint.removeClass('valid');
+            checkPoint.addClass('invalid');
+            if(position.attr('id') === "email") {
+                emailValid = false;
+            }
+            else if(position.attr('id') === "tel") {
+                phoneValid = false;
+            }
+            else if(position.attr('id') === "chk3") {
+                agreementValid = false;
+            }
+            checkReserveBtn();
+        }
     }
 
     function validCheck(position,pattern) {
         var checkPoint = position.closest('.inline_form').find('label > span');
-        position.keyup(function(){
-            if(pattern.test(position.val())) {
-                checkPoint.addClass('valid');
-                checkPoint.removeClass('invalid');
-                if(position.attr('id') === "email") {
-                    emailValid = true;
-                }
-                else if(position.attr('id') === "tel") {
-                    phoneValid = true;
-                }
-                else if(position.attr('id') === "chk3") {
-                    agreementValid = true;
-                }
-                checkReserveBtn();
-
-            }else {
-                checkPoint.removeClass('valid');
-                checkPoint.addClass('invalid');
-                if(position.attr('id') === "email") {
-                    emailValid = false;
-                }
-                else if(position.attr('id') === "tel") {
-                    phoneValid = false;
-                }
-                else if(position.attr('id') === "chk3") {
-                    agreementValid = false;
-                }
-                checkReserveBtn();
-            }
-        });
+        position.keyup(checkValue.bind(this,position,pattern,checkPoint));
 
     }
 
@@ -135,10 +145,38 @@ var BookerInfo = (function(){
         checkReserveBtn();
     }
 
+    function submitReservation(){
+        $(".bk_btn_wrap").on("click", function() {
+            if (checkReserveBtn()) {
+                var data = {
+                    productId: $(location).attr('href').split('/')[4],
+                    generalTicketCount: $("input.count_control_input:eq(0)").val(),
+                    youthTicketCount: $("input.count_control_input:eq(1)").val(),
+                    childTicketCount: $("input.count_control_input:eq(2)").val(),
+                    reservationName: $("input.text").val(),
+                    reservationTel: $("input.tel").val(),
+                    reservationEmail: $("input.email").val()
+                };
+
+                $.ajax({
+                    type: 'post',
+                    url: '/api/reservations',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(data),
+                    success: function () {
+                        alert("예약 성공했습니다.")
+
+                    }
+                });
+            }
+        })
+    }
+
     return {
       init:function(bookerInfoData){
           handlingBookerInfo(bookerInfoData);
           setEvent();
+          submitReservation();
       },
       updateTotalCount : updateTotalCount
     }
@@ -157,8 +195,8 @@ var Storage = (function(){
           var productImage = Init.getData('/api/products/' + productId + '/images');
           var product = Init.getData('/api/products/'+ productId);
           var user = Init.getData('/api/users');
-
-          return $.when(productPrice,productImage,product,user);
+            //
+          return Promise.all([productPrice,productImage,product,user]);
       },
       getProductReserve:function(){
         product.prices = productPrice;
@@ -181,10 +219,10 @@ var Storage = (function(){
 
 })();
 
-Storage.init().done(
-    function(priceResult,imageResult,productResult,userResult){
-      console.log(priceResult);
-        Storage.setStorage(priceResult[0],imageResult[0],productResult[0],userResult[0]);
+
+Storage.init().then(
+    function(result){
+        Storage.setStorage(result[0],result[1],result[2],result[3]);
         Reserve.init(Storage.getProductReserve());
         BookerInfo.init(Storage.getBookerInfo());
 

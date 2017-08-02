@@ -166,28 +166,5 @@
 <script src="/resources/js/reservComponent.js"></script>
 <script src="/resources/js/reserv.js"></script>
 
-<script>
 
-$(".bk_btn_wrap").on("click", function(){
-    var data = {
-	    productId : $(location).attr('href').split('/')[4],
-	    generalTicketCount : $("input.count_control_input:eq(0)").val(),
-	    youthTicketCount : $("input.count_control_input:eq(1)").val(),
-	    childTicketCount : $("input.count_control_input:eq(2)").val(),
-	    reservationName : $("input.text").val(),
-	    reservationTel : $("input.tel").val(),
-	    reservationEmail : $("input.email").val()
-    };
-    
-    $.ajax({
-      type:'post',
-      url:'/api/reservations',
-      contentType: "application/json; charset=utf-8",
-      data:JSON.stringify(data),
-      success:function() {
-        console.log(data);
-      }
-    });
-  })
-</script>
 </html>

@@ -1,63 +1,50 @@
 
 function Ticket(target) {
-  var price = target.find('em.product_dsc > span').text();
-  var minusBtn = target.find('div.clearfix > .ico_minus3');
-  var plusBtn = target.find('div.clearfix > .ico_plus3');
-  var countPosition = target.find('div.clearfix > .count_control_input');
-  var totalPrice = target.find('div.individual_price > .total_price');
-  var count = 0;
-  this.emitter = new eg.Component();
 
 
-  minusBtn.on('click',function(){
-    if(count!=0) {
-      countPosition.val(--count);
-      totalPrice.text(countPosition.val()*price);
-      this.minus(index);
-      if(count===0) {
-        totalPrice.closest('.individual_price').removeClass('on_color');
-        toggling();
-      }
-    }
-  }.bind(this));
+  this.price = target.find('em.product_dsc > span').text();
+  this.minusBtn = target.find('div.clearfix > .ico_minus3');
+  this.plusBtn = target.find('div.clearfix > .ico_plus3');
+  this.countPosition = target.find('div.clearfix > .count_control_input');
+  this.totalPrice = target.find('div.individual_price > .total_price');
+  this.count = 0;
 
+  this.eg = new eg.Component();
+  this.init();
 
-  plusBtn.on('click',function(){
-    countPosition.val(++count);
-    totalPrice.text(countPosition.val()*price);
-    this.plus(index);
-
-    if(count===1) {
-      totalPrice.closest('.individual_price').addClass('on_color');
-      toggling();
-    }
-  }.bind(this));
-
-  function toggling() {
-      minusBtn.toggleClass('disabled');
-      countPosition.toggleClass('disabled');
-    }
 }
 
 Ticket.prototype.constructor=Ticket;
+Ticket.prototype.init= function(){
+    this.minusBtn.on('click',this.minus.bind(this));
+    this.plusBtn.on('click',this.plus.bind(this));
+};
+Ticket.prototype.on = function(trigger,callback){
+  this.eg.on(trigger,callback);
+};
 Ticket.prototype.plus = function() {
-  this.emitter.trigger("plus");
+    if(this.count === 0){
+        this.toggling();
+    }
+  this.countPosition.val(++this.count);
+  this.totalPrice.text(this.countPosition.val()*this.price);
+  this.eg.trigger("plus");
 };
 Ticket.prototype.minus = function() {
-  this.emitter.trigger("minus");
+  if(this.count > 0) {
+      this.countPosition.val(--this.count);
+      this.totalPrice.text(this.countPosition.val() * this.price);
+      if (this.count === 0) {
+          this.toggling();
+      }
+      this.eg.trigger("minus");
+  }
 };
-Ticket.prototype.on = function(eventName, callback) {
-  this.emitter.on(eventName,callback);
-}
+Ticket.prototype.toggling = function(){
+    this.minusBtn.toggleClass('disabled');
+    this.countPosition.toggleClass('disabled');
+    this.totalPrice.closest('.individual_price').toggleClass('on_color');
+
+};
 
 
-
-// UserInfo.prototype = myObserver;
-// UserInfo.prototype.constructor=UserInfo;
-// UserInfo.prototype.valid = function(data) {
-//   console.log(data.id);
-//   this.trigger("valid",data);
-// };
-// UserInfo.prototype.invalid = function(data) {
-//   this.trigger("invalid",data);
-// }

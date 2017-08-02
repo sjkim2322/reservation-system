@@ -248,7 +248,7 @@
 					</div>
 					</script>
 					
-					<a class="btn_review_more" href="#"> <span>예매자 한줄평 더보기</span> <i
+					<a class="btn_review_more" href="reviews"> <span>예매자 한줄평 더보기</span> <i
 						class="fn fn-forward1"></i>
 					</a>
 					</div>

@@ -201,6 +201,9 @@ var resv_reviews = (function() {
   var flicking = new Flicking();
   var popup = new Popup();
 
+  var productId = $(location).attr('href').split('/')[4];
+  var moreButton = $(".section_review_list .btn_review_more");
+
   //함수
   var addEvent = function() {
     $('div.thumb_area').on('click','a.thumb',function(){
@@ -208,7 +211,13 @@ var resv_reviews = (function() {
       HandlebarsModule.create($('#product-photoviews-template'),($(this).data('imglist')));
       popup.showPopup.call(popup);
 
-    })
+    });
+
+
+     moreButton.on("click",function(e){
+       e.preventDefault();
+        location.href = "/products/"+productId+"/reviews";
+      })
   };
 
   return {

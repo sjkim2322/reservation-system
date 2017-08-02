@@ -1,10 +1,5 @@
-
-
 var Reserve = (function(){
-
-
     var tickets = [];
-
     function handlingProduct(product) {
 
         HandlebarsModule.customHelper("priceHelper",function(index) {
@@ -34,7 +29,9 @@ var Reserve = (function(){
                 BookerInfo.updateTotalCount(0);
             });
 
+
         });
+
 
     }
 
@@ -222,6 +219,7 @@ var Storage = (function(){
 
 })();
 
+
 Storage.init().then(
     function(result){
         Storage.setStorage(result[0],result[1],result[2],result[3]);
@@ -233,4 +231,3 @@ Storage.init().then(
 $(document).ready(function(){
 
 });
-

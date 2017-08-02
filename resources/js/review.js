@@ -11,7 +11,7 @@ Popup.prototype.showPopup = function(){
 
 var resv_reviews = (function() {
 
-    var flicking = new FlickingModule();
+    var flicking = new Flicking();
     var popup = new Popup();
 
     var productId = $(location).attr('href').split('/')[4];

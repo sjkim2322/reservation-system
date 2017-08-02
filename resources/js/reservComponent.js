@@ -1,6 +1,7 @@
 
 function Ticket(target) {
 
+
   this.price = target.find('em.product_dsc > span').text();
   this.minusBtn = target.find('div.clearfix > .ico_minus3');
   this.plusBtn = target.find('div.clearfix > .ico_plus3');
@@ -10,6 +11,7 @@ function Ticket(target) {
 
   this.eg = new eg.Component();
   this.init();
+
 }
 
 Ticket.prototype.constructor=Ticket;
@@ -42,5 +44,7 @@ Ticket.prototype.toggling = function(){
     this.minusBtn.toggleClass('disabled');
     this.countPosition.toggleClass('disabled');
     this.totalPrice.closest('.individual_price').toggleClass('on_color');
+
 };
+
 

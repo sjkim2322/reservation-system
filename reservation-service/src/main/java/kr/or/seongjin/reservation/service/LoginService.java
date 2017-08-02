@@ -11,5 +11,5 @@ public interface LoginService {
 
 	public String requestCertification(HttpSession session,String originPath) throws UnsupportedEncodingException;
 	public User requestUserInfo(String code, String state);
-	public User naverLogIn(NaverUser user);
+	public User LogIn(User user);
 }

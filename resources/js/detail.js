@@ -57,6 +57,7 @@ var resv_ProductDetail = (function () {
     productObject = result;
     resv_ProductImg.initTitle(productObject.id);
     resv_ProductTitleDetail.drawDescription(productObject);
+    resv_ProductTitleDetail.drawMap(productObject);
     resv_ProductTitleDetail.drawEvent(productObject.event);
     $('div.section_btn').on('click','button.bk_btn',function() {
       location.href="/reservation/"+productId;
@@ -87,7 +88,7 @@ var resv_ProductImg = (function() {
 
 
   //변수
-  var flicking = new FlickingModule();
+  var flicking = new Flicking();
   var numberingTarget;
   var leftBtn;
   var rightBtn;
@@ -174,6 +175,10 @@ var resv_ProductTitleDetail = (function() {
     },
     drawEvent : function(event) {
       HandlebarsModule.create($('#product-event-template'),event);
+    },
+    drawMap : function(product) {
+      HandlebarsModule.create($('#map-description-template'),product);
+      LocationInfomation.searchAddressToCoordinate(product.place_lot);
     }
   }
 })();
@@ -193,7 +198,7 @@ Popup.prototype.showPopup = function(){
 //한줄평 모듈
 var resv_reviews = (function() {
 
-  var flicking = new FlickingModule();
+  var flicking = new Flicking();
   var popup = new Popup();
 
   //함수
@@ -218,9 +223,6 @@ var resv_reviews = (function() {
 })();
 
 
-
-
-
 //하단 상세 모듈
 var ResvBottomDetail = (function(){
 
@@ -237,18 +239,38 @@ var ResvBottomDetail = (function(){
     tabElements.on('click','a.anchor',function() {
     tabElements.find('a.active').removeClass('active');
       $(this).addClass('active');
-      targetElements.toggle();
-      // if($(this).closest('.item').hasClass('_detail')) {;
-      //   controllTarget($('div.detail_area_wrap'));
-      // }
-      // else {
-      //   controllTarget($('div.detail_location'));
-      // }
+      // targetElements.toggle();
+      if($(this).closest('.item').hasClass('_detail')) {;
+        controllTarget($('div.detail_area_wrap'));
+      }
+      else {
+        controllTarget($('div.detail_location'));
+      }
     });
   }
   return {
     addEvent : addEvent
   }
 })();
+
+var LocationInfomation =(function(){
+  var searchAddressToCoordinate = function(address) {
+    naver.maps.Service.geocode({
+      address: address
+    }, function(status, response) {
+        var item = response.result.items[0],
+        addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+        point = new naver.maps.Point(item.point.x, item.point.y);
+        new naver.maps.Map("map", {
+          center: new naver.maps.LatLng(point),
+          zoom: 10
+        });
+    });
+  }
+  return {
+    searchAddressToCoordinate : searchAddressToCoordinate
+  }
+})();
+
 ResvBottomDetail.addEvent();
 resv_ProductDetail.init();

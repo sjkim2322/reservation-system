@@ -74,6 +74,7 @@ $('#insert').on('click',function() {
 			},
 		data : JSON.stringify(data),
 		type:'POST',
+		processData:true,
  	 success:function(result) {
  		 $('#categoryTable').append(createNewNode(result));
 	 }

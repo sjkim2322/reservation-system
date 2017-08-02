@@ -39,7 +39,7 @@ public class LoginController {
 		
 		  if(session.getAttribute("state").equals(state)) {
 			  NaverUser user = (NaverUser) loginService.requestUserInfo(code,state);
-			  session.setAttribute("user", loginService.naverLogIn(user));
+			  session.setAttribute("user", loginService.LogIn(user));
 			  
 			  System.out.println(originPath);
 			  return "redirect:"+originPath;

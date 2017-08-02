@@ -79,8 +79,9 @@ public class NaverLoginService implements LoginService {
 	}
 
 	@Override
-	public User naverLogIn(NaverUser user) {
-		ReservationUser alreadyUser = selectUser(user.getSnsId());
+	public ReservationUser LogIn(User user) {
+		NaverUser naverUser = (NaverUser) user;
+		ReservationUser alreadyUser = selectUser(naverUser.getSnsId());
 		if(alreadyUser==null) {
 			Integer newUserId = userDao.insert(user);
 			return userDao.selectUser(newUserId);

@@ -7,7 +7,7 @@ var resv_ProductDetail = (function () {
   var reviewObject = null;
   var error = function(){
     // $(location).attr("href", "/");
-  }
+  };
   //함수
   var requestDetailProduct = function() {
     if(productObject === null) {

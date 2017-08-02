@@ -1,4 +1,4 @@
-define(['node_modules/handlebars/dist/handlebars'],function(Handlebars){
+define(['node_modules/handlebars/dist/amd/handlebars'],function(Handlebars){
     var position;
     var source;
     var template;

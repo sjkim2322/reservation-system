@@ -158,13 +158,15 @@
         </div>
     </footer>
 </body>
+<script data-main="/resources/js/reserv.js" src="/resources/js/node_modules/requirejs/require.js"></script>
+<!--  
 <script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
 <script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
 <script src="/resources/js/handlebarsModule.js"></script>
 <script src="/resources/js/node_modules/@egjs/component/dist/component.js"></script>
 <script src="/resources/js/init.js"></script>
 <script src="/resources/js/reservComponent.js"></script>
-<script src="/resources/js/reserv.js"></script>
+<script src="/resources/js/reserv.js"></script>-->
 
 
 </html>

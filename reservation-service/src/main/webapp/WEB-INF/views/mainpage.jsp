@@ -135,9 +135,8 @@
 	</li>
 	</script>
     
-      <script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
-      <script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
-      <script src="/resources/js/mainpage.js"></script>
+    <script data-main="/resources/js/mainpage.js" src="/resources/js/node_modules/requirejs/require.js"></script>
+   
 	</body>
 
 </html>

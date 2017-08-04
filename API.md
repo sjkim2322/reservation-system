@@ -1,3 +1,9 @@
+0.Reservation-system
+================
+이 프로젝트는 기본적인 웹프로그래밍 지식으로 Front-End에서 Back-End까지 전문화된 개발을 한다.  
+
+##[김성진, 정구범, 윤주형]
+
 1.Convention
 =============
  우리끼리 규칙
@@ -5,10 +11,16 @@
 ## [BE]
 * 메소드는 동사, lowerCamelCase
 * 클래스는 명사, UpperCamelCase
+* 
 
 ## [FE]
-2.RESTFul API 정리
+* module
+* component
+* gulp
+* require
 
+2.RESTFul API 정리
+=================
 
 2.1 category
 

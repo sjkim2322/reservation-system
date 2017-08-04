@@ -1,6 +1,9 @@
 0.Reservation-system
 ================
 이 프로젝트는 기본적인 웹프로그래밍 지식으로 Front-End에서 Back-End까지 전문화된 개발을 한다.  
+Back-End/Front-End 지식을 기반으로 예약 서비스를 구현할 수 있다.  
+Back-End : Spring을 활용하여 API을 추축하여 개발할 수 있다.  
+Front-End : jQuery을 기반으로 요구 사항을 개발할 수 있다.  
 
 김성진, 정구범, 윤주형]
 

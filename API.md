@@ -11,10 +11,6 @@
 
 
 2.1 category  
-
-
-
-
 URI|method|기능
 ----|-------|----
 /categories|GET|전체 카테고리 목록 조회

@@ -11,14 +11,18 @@
 
 
 2.1 category  
-URI|method|기능  
 
-/categories |GET |전체 카테고리 목록 조회  
-/categories|POST|카테고리 등록  
-/categories/{id}|PUT|카테고리 수정  
-/categories/{id}|DELETE|카테고리 삭제  
-/categories/{id}/products + page(param)|GET|선택된 카테고리에 등록된 상품 목록 조회  
-/categories/{id}/count + page(param)|GET|선택된 카테고리에 등록된 상품 갯수 조회  
+
+
+
+URI|method|기능
+----|-------|----
+/categories|GET|전체 카테고리 목록 조회
+/categories|POST|카테고리 등록
+/categories/{id}|PUT|카테고리 수정
+/categories/{id}|DELETE|카테고리 삭제
+/categories/{id}/products + page(param)|GET|선택된 카테고리에 등록된 상품 목록 조회
+/categories/{id}/count + page(param)|GET|선택된 카테고리에 등록된 상품 갯수 조회
 
 
 2.2 product  
@@ -29,9 +33,7 @@ URI|method|기능
 /products/{id}|PUT|상품 수정
 /products/{id}|DELETE|상품 삭제
 /products/{id}|GET|상품 상세 조회
-/products/{id}/images
-GET
-선택된 상품에 등록된 파일 조회
+/products/{id}/images|GET|선택된 상품에 등록된 파일 조회
 
 2.3 images (file : 여기서는 image만 사용한다.)  
 URI|method|기능

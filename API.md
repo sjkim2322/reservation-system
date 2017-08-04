@@ -10,7 +10,9 @@
 2.RESTFul API 정리
 
 
-2.1 category  
+2.1 category
+
+
 URI|method|기능
 ----|-------|----
 /categories|GET|전체 카테고리 목록 조회
@@ -22,6 +24,8 @@ URI|method|기능
 
 
 2.2 product  
+
+
 URI|method|기능
 ----|-------|----
 /products + page(param)|GET|전체 상품 목록 조회
@@ -31,20 +35,26 @@ URI|method|기능
 /products/{id}|GET|상품 상세 조회
 /products/{id}/images|GET|선택된 상품에 등록된 파일 조회
 
-2.3 images (file : 여기서는 image만 사용한다.)  
+2.3 images (file : 여기서는 image만 사용한다.) 
+
+
 URI|method|기능
 ----|-------|----
 /images|POST|파일 등록
 /images/{id}|GET|해당 파일 화면에 출력
 
 2.4 comment   
+
+
 URI|method|기능
 ----|-------|----
 /comments|GET|파일 등록
 /comments|POST|선택된 상품에 등록된 파일 조회
 /comments|PUT|해당 파일 화면에 출력
 
-2.5 login //user 와 구분하여 로그인만 처리  
+2.5 login //user 와 구분하여 로그인만 처리
+
+
 URI|method|기능
 ----|-------|----
 /login|GET|네이버 아이디 로그인 화면으로 이동
